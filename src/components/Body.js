@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { restaurantApi } from "../Constants";
+import { restaurantApi ,swiggyApi } from "../Constants";
 import RestaurantCard from "./RestaurantCard";
 import Shimmer from "./Shimmer";
 
@@ -17,7 +17,7 @@ const Body = () => {
 
   const getRestaurants = async () => {
     try {
-      const response = await fetch(restaurantApi);
+      const response = await fetch(swiggyApi);
       const json = await response.json();
 
       // initialize checkJsonData() function to check Swiggy Restaurant data

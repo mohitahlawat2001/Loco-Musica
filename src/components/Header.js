@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const Header = () => {
-        const [login, setLogin] = React.useState(false);
+  const [login, setLogin] = React.useState(false);
   return (
     <div className="nav-bar">
       <div className="nav-bar__logo">
@@ -25,16 +25,18 @@ const Header = () => {
             <Link to="/contact">Contact</Link>
           </li>
         </ul>
-                  </div>
-                  <div className="login">
-                          
-                          {login ? (
-                              <button  className="login__button" onClick={() => setLogin(false)}>Logout</button>
-                          ) : (
-                              <button  className="logout__button" onClick={() => setLogin(true)}>Login</button>
-                          )}
-                </div>
-                          
+      </div>
+      <div className="login">
+        {login ? (
+          <button className="login__button" onClick={() => setLogin(false)}>
+            Logout
+          </button>
+        ) : (
+          <button className="logout__button" onClick={() => setLogin(true)}>
+            Login
+          </button>
+        )}
+      </div>
     </div>
   );
 };
