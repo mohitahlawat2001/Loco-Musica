@@ -3,6 +3,8 @@ import { restaurantApi } from "../Constants";
 import RestaurantCard from "./RestaurantCard";
 import Shimmer from "./Shimmer";
 
+
+
 const Body = () => {
   const [allRestaurants, setAllRestaurants] = React.useState([]);
   const [filteredRestaurants, setFilteredRestaurants] = React.useState([]);
@@ -44,18 +46,22 @@ const Body = () => {
     }
   };
 
+  const filterRestaurants = (allRestaurants) => (
+    allRestaurants.filter((restaurant) => {
+      setError(null);
+      return restaurant?.info?.name
+        .toLowerCase()
+        .includes(search.toLowerCase());
+    })
+  )
+
   const searchRestaurant = (search, allRestaurants) => {
     if (search === "") {
       setFilteredRestaurants(allRestaurants);
       setError("Please enter a valid search");
       return;
     }
-    const filteredRestaurants = allRestaurants.filter((restaurant) => {
-      setError(null);
-      return restaurant?.info?.name
-        .toLowerCase()
-        .includes(search.toLowerCase());
-    });
+    const filteredRestaurants = filterRestaurants(allRestaurants)
     setFilteredRestaurants(filteredRestaurants);
     if (filteredRestaurants.length === 0) {
       setError("No results found");
