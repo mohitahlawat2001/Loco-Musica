@@ -1,7 +1,8 @@
 import React, { useEffect } from "react";
-import { restaurantApi ,swiggyApi } from "../Constants";
+import { swiggyApi } from "../Constants";
 import RestaurantCard from "./RestaurantCard";
 import Shimmer from "./Shimmer";
+import { filterRestaurant } from "../utils/helper";
 
 
 
@@ -45,23 +46,13 @@ const Body = () => {
       console.log(error);
     }
   };
-
-  const filterRestaurants = (allRestaurants) => (
-    allRestaurants.filter((restaurant) => {
-      setError(null);
-      return restaurant?.info?.name
-        .toLowerCase()
-        .includes(search.toLowerCase());
-    })
-  )
-
   const searchRestaurant = (search, allRestaurants) => {
     if (search === "") {
       setFilteredRestaurants(allRestaurants);
       setError("Please enter a valid search");
       return;
     }
-    const filteredRestaurants = filterRestaurants(allRestaurants)
+    const filteredRestaurants = filterRestaurant(allRestaurants, search);
     setFilteredRestaurants(filteredRestaurants);
     if (filteredRestaurants.length === 0) {
       setError("No results found");
@@ -73,16 +64,16 @@ const Body = () => {
   }
   return (
     <>
-      <div className="search-bar">
+      <div className="p-4  text-center rounded-xl mx-40 ">
         <input
-          className="search-bar__input"
+          className="text-center px-40 py-1 border-2 border-gray-300 rounded-md :focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent"
           type="text"
           placeholder="Search"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />
         <button
-          className="search-bar__button"
+          className="px-2 py-1 bg-pink-300  text-white rounded-md ml-2 hover:bg-pink-500 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-opacity-50"
           onClick={() => {
             searchRestaurant(search, allRestaurants);
           }}
@@ -90,9 +81,10 @@ const Body = () => {
           Search
         </button>
       </div>
-      {error && <p>{error}</p>}
+      {error && <p className="text-center text-red-500 font-bold p-2"
+      >{error}</p>}
 
-      <div className="body">
+      <div className="flex flex-wrap justify-center flex-row mx-20">
         {filteredRestaurants.map((restaurant) => (
           <RestaurantCard key={restaurant?.info.id} {...restaurant?.info} />
         ))}
