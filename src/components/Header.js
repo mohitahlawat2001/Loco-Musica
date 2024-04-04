@@ -9,12 +9,12 @@ const Header = () => {
     <>
     <div className=" flex justify-between bg-transparent shadow-md m-2 p-2 ">
       <div className="h-10 w-10 m-2 ">
-        <a href="/">
+        <Link href="/">
           <img
             src="https://www.freepnglogos.com/uploads/spotify-logo-png/spotify-icon-marilyn-scott-0.png"
             alt="logo"
           />
-        </a>
+        </Link>
       </div>
       <div >
         <ul className="flex flex-row space-x-5 p-3 m-2" >
