@@ -2,9 +2,16 @@ import { useParams } from "react-router-dom";
 import {  IMG_URL } from "../Constants";
 import Shimmer from "./Shimmer";
 import useRestaurant from "../utils/useRestaurant";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../utils/cartSlice";
 
 const RestanurantMenu = () => {
   const { id } = useParams();
+  const dispatch = useDispatch();
+
+  const handleAddToCart = (item) => {
+    dispatch(addToCart(item));
+  };
 
   const { restaurant, menu } = useRestaurant(id);
 
@@ -24,7 +31,11 @@ const RestanurantMenu = () => {
         <p className="text-lg mb-2">{restaurant?.costForTwoMessage}</p>
           <p className="text-lg mb-2">⭐ {restaurant?.avgRating}</p>
           <p className="text-lg mb-2">{restaurant?.totalRatingsString}</p>
-          <p className="text-lg mb-2">Close Time { restaurant?.availability?.nextCloseTime}</p>
+          <p className="text-lg mb-2">Close Time {restaurant?.availability?.nextCloseTime}</p>
+          <p className="text-lg mb-2">Open Time {restaurant?.availability?.nextOpenTime}</p>
+          <button className="bg-blue-500 text-white p-2 rounded-lg" onClick={() => handleAddToCart(restaurant)}>
+            Add to Cart
+          </button>
       </div>
 
       {!menu ? (
@@ -42,6 +53,10 @@ const RestanurantMenu = () => {
                 ) : (
                   <p className="text-lg mb-2">{item?.card?.info?.price}</p>
                 )}
+
+                <button className="bg-blue-500 text-white p-2 rounded-lg" onClick={() => handleAddToCart(item)}>
+                  Add to Cart
+                </button>
               </li>
             ))}
           </ul>

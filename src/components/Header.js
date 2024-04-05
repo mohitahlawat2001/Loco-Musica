@@ -1,10 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import useOnline from "../utils/useOnline";
+import { useSelector } from "react-redux";
 
 const Header = () => {
   const [login, setLogin] = React.useState(false);
   const isOnline = useOnline();
+  const cart = useSelector((state) => state.cart.items);
   return (
     <>
     <div className=" flex justify-between bg-transparent shadow-md m-2 p-2 ">
@@ -26,7 +28,12 @@ const Header = () => {
           </li>
           <li>
             <Link to="/contact">Contact</Link>
-          </li>
+            </li>
+            <li>
+              <Link to="/cart">Cart - {cart.length}
+              {/* <p className="bg-red-500 rounded-full h-5 w-5 text-white text-center">{cart.length}</p> */}
+              </Link>
+            </li>
         </ul>
       </div>
       <div className="p-3 m-2 ">
