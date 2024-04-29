@@ -38,12 +38,12 @@ const RestanurantMenu = () => {
           </button>
       </div>
 
-      {!menu ? (
+      {/* {!menu ? (
         <Shimmer />
-      ) : (
+      ) : ( */}
         <div className="mx-3 bg-gray-800 text-white p-4 rounded-lg mt-1">
           <h1 className="text-3xl font-bold mb-4">Menu</h1>
-          <ul>
+          <ul data-testid="menu" >
             {Object.values(menu).map((item) => (
               <li key={item?.card?.info?.id} className="mb-4">
                 <h3 className="text-2xl mb-2">{item?.card?.info?.name}</h3>
@@ -54,14 +54,17 @@ const RestanurantMenu = () => {
                   <p className="text-lg mb-2">{item?.card?.info?.price}</p>
                 )}
 
-                <button className="bg-blue-500 text-white p-2 rounded-lg" onClick={() => handleAddToCart(item)}>
+                <button className="bg-blue-500 text-white p-2 rounded-lg"
+                  onClick={() => handleAddToCart(item)}
+                  data-testid="addBtn"
+                >
                   Add to Cart
                 </button>
               </li>
             ))}
           </ul>
         </div>
-      )}
+      {/* )} */}
     </div>
   );
 };

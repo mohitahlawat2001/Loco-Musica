@@ -14,7 +14,8 @@ const Header = () => {
         <Link href="/">
           <img
             src="https://www.freepnglogos.com/uploads/spotify-logo-png/spotify-icon-marilyn-scott-0.png"
-            alt="logo"
+              alt="logo"
+              data-testid="logo"
           />
         </Link>
       </div>
@@ -30,7 +31,7 @@ const Header = () => {
             <Link to="/contact">Contact</Link>
             </li>
             <li>
-              <Link to="/cart">Cart - {cart.length}
+              <Link data-testid="cart" to="/cart">Cart - {cart.length}
               {/* <p className="bg-red-500 rounded-full h-5 w-5 text-white text-center">{cart.length}</p> */}
               </Link>
             </li>
@@ -49,6 +50,8 @@ const Header = () => {
       </div>
 
       </div>
+
+      <h1 data-testid="online-status">
       {
         isOnline ? (
           <div className="border mx-80 bg-green-400 rounded-md h-2  ">
@@ -58,6 +61,7 @@ const Header = () => {
           </div>
         )
       }
+      </h1>
       
     </>
   );

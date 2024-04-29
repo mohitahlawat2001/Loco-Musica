@@ -12,7 +12,7 @@ const CardShimmer = () => {
 
 const Shimmer = () => {
     return (
-        <div className="shimmer-wrapper">
+        <div className="shimmer-wrapper" data-testid="shimmer">
             {
                 [...Array(10)].map((_, index) => (
                     <CardShimmer key={index} />
