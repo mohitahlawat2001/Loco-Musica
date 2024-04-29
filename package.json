@@ -2,7 +2,6 @@
   "name": "namaste-react",
   "version": "1.0.0",
   "description": "class ist ",
-  "main": "index.html",
   "scripts": {
     "test": "jest",
     "start": "parcel index.html",
