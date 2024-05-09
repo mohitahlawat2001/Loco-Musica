@@ -11,6 +11,7 @@
     "react",
     "javascript"
   ],
+  "proxy":"https://loco-musica.vercel.app",
   "author": "mohit ahlawat",
   "license": "MIT",
   "dependencies": {
