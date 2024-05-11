@@ -1,6 +1,7 @@
 {
   "name": "namaste-react",
   "version": "1.0.0",
+  "proxy":"https://cautious-broccoli-vw69wq5vwv7h5w7-1234.app.github.dev",
   "description": "class ist ",
   "scripts": {
     "test": "jest",
@@ -11,7 +12,6 @@
     "react",
     "javascript"
   ],
-  "proxy":"https://loco-musica.vercel.app",
   "author": "mohit ahlawat",
   "license": "MIT",
   "dependencies": {
