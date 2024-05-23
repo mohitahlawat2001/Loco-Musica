@@ -62,7 +62,7 @@ const Body = () => {
   if (allRestaurants.length === 0) {
     return <Shimmer />;
   }
-  return (
+  return allRestaurants?.length === 0 ? (<Shimmer /> ): (
     <>
       <div className="p-4  text-center rounded-xl mx-40 ">
         <input
