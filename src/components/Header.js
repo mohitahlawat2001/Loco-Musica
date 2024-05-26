@@ -2,6 +2,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 import useOnline from "../utils/useOnline";
 import { useSelector } from "react-redux";
+import Cart from "../assets/cart.png";
+import Loco from "../assets/loco.png";
 
 const Header = () => {
   const [login, setLogin] = React.useState(false);
@@ -10,12 +12,13 @@ const Header = () => {
   return (
     <>
     <div className=" flex justify-between bg-transparent shadow-md m-2 p-2 ">
-      <div className="h-10 w-10 m-2 ">
+      <div className=" m-2 ">
         <Link href="/">
           <img
-            src="https://www.freepnglogos.com/uploads/spotify-logo-png/spotify-icon-marilyn-scott-0.png"
+            src={Loco}
               alt="logo"
               data-testid="logo"
+              className="h-12 w-12 shadow-sm  border  rounded-tr-lg rounded-bl-lg "
           />
         </Link>
       </div>
@@ -31,8 +34,8 @@ const Header = () => {
             <Link to="/contact">Contact</Link>
             </li>
             <li>
-              <Link data-testid="cart" to="/cart">Cart - {cart.length}
-              {/* <p className="bg-red-500 rounded-full h-5 w-5 text-white text-center">{cart.length}</p> */}
+              <Link  className="flex" data-testid="cart" to="/cart"> 
+              <img src={Cart} alt="cart" className="h-5 w-5 mx-2" /> - <span className="mx-2">{cart.length}</span>
               </Link>
             </li>
         </ul>
