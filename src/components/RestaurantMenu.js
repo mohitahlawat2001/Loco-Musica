@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import {  IMG_URL } from "../Constants";
 import Shimmer, { MenuShimmer, RestaurantShimmer } from "./Shimmer";
 import useRestaurant from "../utils/useRestaurant";
@@ -55,6 +55,12 @@ const RestanurantMenu = () => {
                 ) : (
                   <p className="text-lg mb-2">{item?.card?.info?.price}</p>
                 )}
+
+                <div className="flex justify-between ">
+                  <Link to={'/recipe/' + item?.card?.info?.name} className="text-blue-500">
+                    View Recipe
+                  </Link>
+                </div>
 
                 <button className="bg-blue-500 text-white p-2 rounded-lg"
                   onClick={() => handleAddToCart(item)}

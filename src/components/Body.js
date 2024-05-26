@@ -59,10 +59,8 @@ const Body = () => {
     }
   };
 
-  if (allRestaurants.length === 0) {
-    return <Shimmer />;
-  }
-  return allRestaurants?.length === 0 ? (<Shimmer /> ): (
+  
+  return (
     <>
       <div className="p-4  text-center rounded-xl mx-40 ">
         <input
@@ -85,7 +83,7 @@ const Body = () => {
       </div>
       {error && <p className="text-center text-red-500 font-bold p-2"
       >{error}</p>}
-
+{allRestaurants?.length === 0 ? <Shimmer /> : (
       <div
         data-testid="res-list"
         className="flex flex-wrap justify-center flex-row mx-20"
@@ -94,8 +92,9 @@ const Body = () => {
           <RestaurantCard key={restaurant?.info.id} {...restaurant?.info} />
         ))}
       </div>
+    )}
     </>
-  );
+    )
 };
 
 export default Body;

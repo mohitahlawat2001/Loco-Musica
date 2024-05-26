@@ -11,9 +11,9 @@ const RestaurantCard = ({
   avgRating,
 }) => {
   return (
-    <div className="flex flex-col shadow-lg bg-white m-2 p-2 w-64">
-      <div className="w-full h-40 p-2 m-2 shadow-lg bg-pink-50 transform hover:rotate-0 transition duration-500">
-          <img src={IMG_URL + cloudinaryImageId} alt="restaurant" className="w-full h-full object-cover transform hover:rotate-6" />
+    <div className="flex flex-col shadow-lg rounded-tl-xl rounded-br-xl bg-pink-100 m-2 p-2 w-64 hover:animate-pulse ">
+      <div className="h-40 shadow-lg transform hover:rotate-0 transition duration-500 m-2">
+          <img src={IMG_URL + cloudinaryImageId} alt="restaurant" className="w-full h-full rounded-tl-xl rounded-br-xl  object-cover transform hover:rotate-6" />
       </div>
       <div className="p-2 m-2">
         <Link to={`/restaurant/${id}`} key={id}>
