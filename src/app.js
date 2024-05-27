@@ -12,6 +12,9 @@ import UserContext from "./utils/useContext";
 import { Provider } from "react-redux";
 import store from "./utils/store";
 import Cart from "./components/Cart";
+import Recipe from "./components/Recipe";
+import RecipeStore from "./components/RecipeStore";
+import Login from "./components/Login";
 
 const About = lazy(() => import("./components/About"));
 
@@ -19,10 +22,12 @@ const AppLayout = () => {
   const [user, setUser] = useState({
       name: "Guest",
       email: "email.com",
+      password: "password",
   });
+  const [login, setLogin] = useState(false);
   return (
     <Provider store={store}>
-    <UserContext.Provider value={{ user: user, setUser: setUser }}>
+    <UserContext.Provider value={{ user: user, setUser: setUser , login:login , setLogin:setLogin  }}>
       <Header />
       <Outlet />
       <Footer />
@@ -60,10 +65,20 @@ const appRoute = createBrowserRouter([
       {
         path: "/restaurant/:id",
         element: <RestaurantMenu />,
+      },{
+        path: "/recipe/:name",
+        element: <Recipe />,
       },
       {
         path: "/cart",
         element: <Cart/>
+      },
+      {
+        path: "/recipeStore",
+        element: <RecipeStore/>
+      },{
+        path: "/login",
+        element: <Login/>,
       }
     ],
   },
