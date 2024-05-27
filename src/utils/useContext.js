@@ -4,6 +4,8 @@ const UserContext = createContext({
     user: {
         name: "Guest",
         email: "email.com",
+        password: "password",
+        login: false,
     },
 });
 
