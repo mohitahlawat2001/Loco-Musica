@@ -1,7 +1,7 @@
 {
   "name": "namaste-react",
   "version": "1.0.0",
-  "proxy":"https://cautious-broccoli-vw69wq5vwv7h5w7-1234.app.github.dev",
+  "proxy": "https://cautious-broccoli-vw69wq5vwv7h5w7-1234.app.github.dev",
   "description": "class ist ",
   "scripts": {
     "test": "jest",
@@ -16,8 +16,10 @@
   "license": "MIT",
   "dependencies": {
     "-": "^0.0.1",
+    "@google/generative-ai": "^0.11.4",
     "@reduxjs/toolkit": "^2.2.3",
     "D": "^1.0.0",
+    "marked": "^12.0.2",
     "parcel": "^2.12.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
