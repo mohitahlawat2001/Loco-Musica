@@ -106,7 +106,7 @@ const Recipe = () => {
             element.click();
         }}
         className='bg-pink-500 text-white p-2 rounded-lg shadow-lg hover:bg-pink-700 hover:text-white m-5'
-        >Save  AI Response</button>
+        >Download Recipe  </button>
 
         <button onClick={() => {
             setIsAdding(!isAdding);
@@ -117,7 +117,7 @@ const Recipe = () => {
         }
         }}
         className='bg-pink-500 text-white p-2 rounded-lg shadow-lg hover:bg-pink-700 hover:text-white m-5'
-        >Add to Cart</button>
+        >Add to Recipe Store </button>
         </div>
     )
 }
