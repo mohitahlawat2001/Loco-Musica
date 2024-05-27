@@ -4,11 +4,11 @@ import useOnline from "../utils/useOnline";
 import { useSelector } from "react-redux";
 import Cart from "../assets/cart.png";
 import Loco from "../assets/loco.png";
-import Login from "../assets/login.png";
-import Logout from "../assets/logout.png";
 import RecipeStore from "../assets/recipeStore.png";
 import { useContext } from "react";
 import UserContext  from "../utils/useContext";
+import { faCircleUser , faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const Header = () => {
   const { user ,setUser } = useContext(UserContext);
@@ -65,12 +65,14 @@ const Header = () => {
       <div className="p-3 m-2 ">
         {user.login ? 
             <div onClick={handleLogout}>
-              <img src={Logout} alt="logout" className="h-9 w-9 mx-2" /> 
+              {/* <img src={Logout} alt="logout" className="h-9 w-9 mx-2" />  */}
+              <FontAwesomeIcon icon={faRightFromBracket} size="2xl" />
             </div>
             : (
-            <Link to="/login">
-              <img src={Login} alt="login" className="h-9 w-9 mx-2" />
-            </Link>
+            <Link to="/login"  >
+              {/* <img src={Login} alt="login"  /> */}
+              <FontAwesomeIcon icon={faCircleUser} size="2xl" />    
+                  </Link>
         )}
       </div>
 
