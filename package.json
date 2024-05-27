@@ -16,6 +16,11 @@
   "license": "MIT",
   "dependencies": {
     "-": "^0.0.1",
+    "@fortawesome/fontawesome-svg-core": "^6.5.2",
+    "@fortawesome/free-brands-svg-icons": "^6.5.2",
+    "@fortawesome/free-regular-svg-icons": "^6.5.2",
+    "@fortawesome/free-solid-svg-icons": "^6.5.2",
+    "@fortawesome/react-fontawesome": "^0.2.2",
     "@google/generative-ai": "^0.11.4",
     "@reduxjs/toolkit": "^2.2.3",
     "D": "^1.0.0",
