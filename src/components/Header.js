@@ -4,15 +4,17 @@ import useOnline from "../utils/useOnline";
 import { useSelector } from "react-redux";
 import Cart from "../assets/cart.png";
 import Loco from "../assets/loco.png";
+import RecipeStore from "../assets/recipeStore.png";
 
 const Header = () => {
   const [login, setLogin] = React.useState(false);
   const isOnline = useOnline();
   const cart = useSelector((state) => state.cart.items);
+  const recipes = useSelector((state) => state.recipe.recipes);
   return (
     <>
-    <div className=" flex justify-between bg-transparent shadow-md m-2 p-2 ">
-      <div className=" m-2 ">
+    <div className=" flex justify-between bg-transparent shadow-md my-2 py-2 ">
+      <div className=" mx-4 my-2 ">
         <Link href="/">
           <img
             src={Loco}
@@ -25,13 +27,16 @@ const Header = () => {
       <div >
         <ul className="flex flex-row space-x-5 p-3 m-2" >
           <li>
-            <Link to="/">Home</Link>
-          </li>
-          <li>
             <Link to="/about">About</Link>
           </li>
           <li>
             <Link to="/contact">Contact</Link>
+            </li>
+            <li>
+              <Link className="flex" to="/recipeStore">
+              <img src={RecipeStore} alt="recipeStore" className="h-5 w-5 mx-2" /> -
+               <span className="mx-2">{recipes.length}</span>
+              </Link>
             </li>
             <li>
               <Link  className="flex" data-testid="cart" to="/cart"> 
