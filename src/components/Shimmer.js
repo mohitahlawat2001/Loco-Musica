@@ -97,6 +97,30 @@ export const RecipeShimmer = ()=>{
     );
 }
 
+
+export const FallbackShimmer = () => (
+    <div className="animate-pulse p-10 m-10 ">
+    {Array.from({ length: 2 }).map((_, index) => (<div>
+        <div key={index} className={`bg-gray-300 h-4 mb-2 mx-auto rounded w-${Math.floor(Math.random() * 5)}/5`}>    
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        {Array.from({ length: 2 }).map((_, index) => (
+            <div key={index} className="bg-gray-300 h-4 w-full mb-2 rounded"></div>
+        ))}
+    </div>
+    {Array.from({ length: 2 }).map((_, index) => (
+        <div key={index} className={`bg-gray-300 h-4 mb-2 mx-auto rounded w-${Math.floor(Math.random() * 5)}/5`}></div>
+    ))}
+    {Array.from({ length: 2 }).map((_, index) => (
+            <div key={index} className="bg-gray-300 h-4 w-full mb-2 rounded"></div>
+        ))}
+        </div>
+        
+    ))}
+    </div>
+  );
+
+
 export default Shimmer;
 
 

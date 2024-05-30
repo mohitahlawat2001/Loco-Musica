@@ -4,7 +4,7 @@ import Header from "./components/Header";
 import Body from "./components/Body";
 import Footer from "./components/Footer";
 import Error from "./components/Error";
-import Contact from "./components/Contact";
+// import Contact from "./components/Contact";
 import RestaurantMenu from "./components/RestaurantMenu";
 import { createBrowserRouter , RouterProvider ,Outlet } from "react-router-dom";
 import Profile from "./components/Profile";
@@ -15,8 +15,10 @@ import Cart from "./components/Cart";
 import Recipe from "./components/Recipe";
 import RecipeStore from "./components/RecipeStore";
 import Login from "./components/Login";
+import { FallbackShimmer } from "./components/Shimmer";
 
 const About = lazy(() => import("./components/About"));
+const Contact = lazy(() => import("./components/Contact"));
 
 const AppLayout = () => {
   const [user, setUser] = useState({
@@ -48,7 +50,7 @@ const appRoute = createBrowserRouter([
       },
       {
         path: "/about",
-        element: (<Suspense fallback={<div>Loading...</div>}>
+        element: (<Suspense fallback={<FallbackShimmer/>}>
           <About />
           </Suspense>),
         children: [
@@ -60,7 +62,9 @@ const appRoute = createBrowserRouter([
       },
       {
         path: "/contact",
-        element: <Contact />,
+        element: (<Suspense fallback={<FallbackShimmer/>}>
+          <Contact />
+          </Suspense>),
       },
       {
         path: "/restaurant/:id",
