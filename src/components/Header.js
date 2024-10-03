@@ -71,10 +71,6 @@ const Header = () => {
         </div>
         <div className="p-3 m-2 ">
           {user.login ? (
-            // <div onClick={handleLogout}>
-            //   {/* <img src={Logout} alt="logout" className="h-9 w-9 mx-2" />  */}
-            //   <FontAwesomeIcon icon={faRightFromBracket} size="2xl" />
-            // </div>
             <div className="flex items-center">
                             {/* User Name and Email */}
                             <p className="mx-2">Welcome, {user.name}!</p>
