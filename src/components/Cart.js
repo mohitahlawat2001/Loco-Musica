@@ -77,17 +77,17 @@ const Cart = () => {
                         <h3 className="text-xl font-bold mb-2">{item?.card?.info?.name}</h3>
                         <p className="text-lg mb-2">{item?.card?.info?.description}</p>
                         <p className="text-lg mb-2">Price: ₹{(item?.card?.info?.price || item?.card?.info?.defaultPrice) / 100}</p>
-                        <p className="text-lg mb-2">Quantity: {quantities[item?.card?.info?.id]}</p>
 
-                        <div className="flex mb-4">
+                        <div className="flex items-center mb-4">
                             <button
                                 className="bg-blue-500 text-white px-2 py-1 rounded-md"
                                 onClick={() => handleQuantityChange(item, "increase")}
                             >
                                 +
                             </button>
+                            <span className="mx-4 text-lg">{quantities[item?.card?.info?.id]}</span>
                             <button
-                                className="bg-blue-500 text-white px-2 py-1 rounded-md ml-2"
+                                className="bg-blue-500 text-white px-2 py-1 rounded-md"
                                 onClick={() => handleQuantityChange(item, "decrease")}
                                 disabled={quantities[item?.card?.info?.id] === 1}
                             >
