@@ -1,11 +1,10 @@
 import React, { useEffect, useState, useMemo } from "react"; // Import useMemo
 import { swiggyApi } from "../Constants";
+import { defaultLat,defaultLon } from "../Constants";
 import RestaurantCard from "./RestaurantCard";
 import Shimmer from "./Shimmer";
 import { filterRestaurant } from "../utils/helper";
 
-const defaultLat = "21.1702401"; // Default latitude for India
-const defaultLon = "72.83106070000001"; // Default longitude for India
 
 const Body = () => {
   const [allRestaurants, setAllRestaurants] = useState([]);
@@ -45,7 +44,7 @@ const Body = () => {
     try {
       const apiUrl = `https://foodfire.onrender.com/api/restaurants?lat=${lat}&lng=${lon}&page_type=DESKTOP_WEB_LISTING`;
       //const apiUrl = `${swiggyApi}?lat=${lat}&lng=${lon}&page_type=DESKTOP_WEB_LISTING`; 
-      
+
       const response = await fetch(apiUrl);
       const json = await response.json();
 
