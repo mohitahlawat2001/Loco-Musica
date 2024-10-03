@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react"; // Import useMemo
 import { swiggyApi } from "../Constants";
 import RestaurantCard from "./RestaurantCard";
 import Shimmer from "./Shimmer";
@@ -9,7 +9,6 @@ const defaultLon = "72.83106070000001"; // Default longitude for India
 
 const Body = () => {
   const [allRestaurants, setAllRestaurants] = useState([]);
-  const [filteredRestaurants, setFilteredRestaurants] = useState([]);
   const [search, setSearch] = useState("");
   const [error, setError] = useState(null);
   const [location, setLocation] = useState({ lat: defaultLat, lon: defaultLon });
@@ -45,6 +44,8 @@ const Body = () => {
   const getRestaurants = async (lat, lon) => {
     try {
       const apiUrl = `https://foodfire.onrender.com/api/restaurants?lat=${lat}&lng=${lon}&page_type=DESKTOP_WEB_LISTING`;
+      //const apiUrl = `${swiggyApi}?lat=${lat}&lng=${lon}&page_type=DESKTOP_WEB_LISTING`; 
+      
       const response = await fetch(apiUrl);
       const json = await response.json();
 
@@ -62,30 +63,29 @@ const Body = () => {
 
       const resData = await checkJsonData(json);
       setAllRestaurants(resData || []); // Fallback to empty array if no data
-      setFilteredRestaurants(resData || []);
     } catch (error) {
       console.error("Error fetching restaurant data:", error);
       setError("Unable to fetch restaurant data.");
     }
   };
 
-  // Search function
-  const searchRestaurant = (search, allRestaurants) => {
+  // Memoize the filtered restaurants based on search input
+  const filteredRestaurants = useMemo(() => {
     if (search === "") {
-      setFilteredRestaurants(allRestaurants);
-      setError("Please enter a valid search");
-      return;
+      return allRestaurants;
     }
-    const filteredRestaurants = filterRestaurant(allRestaurants, search);
-    setFilteredRestaurants(filteredRestaurants);
-    if (filteredRestaurants.length === 0) {
+    const filtered = filterRestaurant(allRestaurants, search);
+    if (filtered.length === 0) {
       setError("No results found");
+    } else {
+      setError(null); // Clear error if results are found
     }
-  };
+    return filtered;
+  }, [allRestaurants, search]); // Dependencies
 
   return (
     <>
-      <div className="p-4  text-center rounded-xl mx-40 ">
+      <div className="p-4 text-center rounded-xl mx-40 ">
         <input
           data-testid="search-input"
           className="text-center px-40 py-1 border-2 border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent"
@@ -96,9 +96,10 @@ const Body = () => {
         />
         <button
           data-testid="search-btn"
-          className="px-2 py-1 bg-pink-300  text-white rounded-md ml-2 hover:bg-pink-500 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-opacity-50"
+          className="px-2 py-1 bg-pink-300 text-white rounded-md ml-2 hover:bg-pink-500 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-opacity-50"
           onClick={() => {
-            searchRestaurant(search, allRestaurants);
+            // Trigger search on button click (optional; can also rely on input change)
+            setSearch(search);
           }}
         >
           Search
