@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect } from "react";
 import { swiggyApi } from "../Constants";
 import RestaurantCard from "./RestaurantCard";
 import Shimmer from "./Shimmer";
@@ -11,7 +11,6 @@ const Body = () => {
   const [filteredRestaurants, setFilteredRestaurants] = React.useState([]);
   const [search, setSearch] = React.useState("");
   const [error, setError] = React.useState(null);
-  const debounceTimeout = useRef(null);
 
   useEffect(() => {
     getRestaurants();
@@ -47,21 +46,10 @@ const Body = () => {
       console.log(error);
     }
   };
-
-  const debounceSearch = (searchTerm) => {
-    clearTimeout(debounceTimeout.current); // Clear the previous timeout
-    debounceTimeout.current = setTimeout(() => {
-        console.log("Searching for:", searchTerm); // Log the search term
-        searchRestaurant(searchTerm);
-    }, 1000); // 3 seconds delay
-};
-
-
-  const searchRestaurant = (search) => {
+  const searchRestaurant = (search, allRestaurants) => {
     if (search === "") {
       setFilteredRestaurants(allRestaurants);
-      setError("")
-      // setError("Please enter a valid search");
+      setError("Please enter a valid search");
       return;
     }
     const filteredRestaurants = filterRestaurant(allRestaurants, search);
@@ -74,21 +62,16 @@ const Body = () => {
   
   return (
     <>
-      <div className="p-4 text-center rounded-xl mx-40">
-        <div className="">
+      <div className="p-4  text-center rounded-xl mx-40 ">
         <input
                     data-testid="search-input"
-          className="px-5 bg-white shadow-md hover:scale-105 transform transition-transform duration-300 focus:scale-105 rounded-lg py-3 w-[30rem] border border-gray-200 focus:outline-none"
+          className="text-center px-40 py-1 border-2 border-gray-300 rounded-md :focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent"
           type="text"
-          placeholder="Search for the restaurant"
+          placeholder="Search"
           value={search}
-          onChange={(e) => {
-            setSearch(e.target.value);
-            debounceSearch(e.target.value);
-          }}
+          onChange={(e) => setSearch(e.target.value)}
         />
-        </div>
-        {/* <button
+        <button
                     data-testid="search-btn"
           className="px-2 py-1 bg-pink-300  text-white rounded-md ml-2 hover:bg-pink-500 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-opacity-50"
           onClick={() => {
@@ -96,7 +79,7 @@ const Body = () => {
           }}
         >
           Search
-        </button> */}
+        </button>
       </div>
       {error && <p className="text-center text-red-500 font-bold p-2"
       >{error}</p>}
