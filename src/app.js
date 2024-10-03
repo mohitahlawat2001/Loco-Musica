@@ -16,6 +16,8 @@ import Recipe from "./components/Recipe";
 import RecipeStore from "./components/RecipeStore";
 import Login from "./components/Login";
 import { FallbackShimmer } from "./components/Shimmer";
+import '@fortawesome/fontawesome-free/css/all.min.css';
+
 
 const About = lazy(() => import("./components/About"));
 const Contact = lazy(() => import("./components/Contact"));
