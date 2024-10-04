@@ -11,3 +11,5 @@ export const swiggyApi = "https://foodfire.onrender.com/api/restaurants?lat=21.1
 
 export const SwiggyMenuApi = "https://foodfire.onrender.com/api/menu?page-type=REGULAR_MENU&complete-menu=true&lat=28.65200&lng=77.16630&restaurantId="
 
+export const defaultLat = "21.1702401"; // Default latitude for India
+export const defaultLon = "72.83106070000001"; // Default longitude for India
