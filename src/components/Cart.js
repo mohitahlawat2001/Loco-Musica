@@ -6,15 +6,6 @@ const Cart = () => {
   const cart = useSelector((state) => state.cart.items);
   const dispatch = useDispatch();
 
-//   No need of quantities array, every thing is stored in redux store ( cart slice)
-
-//   const [quantities, setQuantities] = useState(
-//     cart.reduce((acc, item) => {
-//       acc[item?.card?.info?.id] = 1;
-//       return acc;
-//     }, {})
-//   );
-
   const handleClearCart = () => {
     dispatch(clearCart());
   };
@@ -22,25 +13,6 @@ const Cart = () => {
   const handleRemoveFromCart = (item) => {
     dispatch(removeFromCart(item));
   };
-
-//   No need of this function every thing is done using cartslice functions
-
-//   const handleQuantityChange = (item, operation) => {
-//     const itemId = item?.card?.info?.id;
-//     const currentQuantity = quantities[itemId];
-
-//     if (operation === "increase") {
-//       setQuantities({
-//         ...quantities,
-//         [itemId]: currentQuantity + 1,
-//       });
-//     } else if (operation === "decrease" && currentQuantity > 1) {
-//       setQuantities({
-//         ...quantities,
-//         [itemId]: currentQuantity - 1,
-//       });
-//     }
-//   };
 
   const totalPrice = () => {
     let total = 0;
