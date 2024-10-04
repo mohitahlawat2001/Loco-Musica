@@ -5,7 +5,6 @@ import RestaurantCard from "./RestaurantCard";
 import Shimmer from "./Shimmer";
 import { filterRestaurant } from "../utils/helper";
 
-
 const Body = () => {
   const [allRestaurants, setAllRestaurants] = useState([]);
   const [search, setSearch] = useState("");
@@ -85,22 +84,19 @@ const Body = () => {
   return (
     <>
       <div className="p-4 text-center rounded-xl mx-40 ">
-        <input
-          data-testid="search-input"
-          className="text-center px-40 py-1 border-2 border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent"
-          type="text"
-          placeholder="Search"
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-        />
-        <button
-          data-testid="search-btn"
-          className="px-2 py-1 bg-pink-300 text-white rounded-md ml-2 hover:bg-pink-500 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-opacity-50"
-          onClick={() => {
-            // Trigger search on button click (optional; can also rely on input change)
-            setSearch(search);
-          }}
-        >
+      <input
+        data-testid="search-input"
+        className="text-center w-full sm:w-3/4 md:w-2/3 lg:w-1/2 px-4 py-2 border-2 border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent"
+        type="text"
+        placeholder="Search"
+        value={search}
+        onChange={(e) => setSearch(e.target.value)}
+      />
+      <button
+        data-testid="search-btn"
+        className="mt-2 sm:mt-0 sm:ml-2 px-2 py-1 bg-pink-300 text-white rounded-md hover:bg-pink-500 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-opacity-50"
+        onClick={() => setSearch(search)}
+      >
           Search
         </button>
       </div>

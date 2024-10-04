@@ -3,26 +3,43 @@ import { useSelector, useDispatch } from "react-redux";
 import { useState } from "react";
 import marked from "marked";
 
-
 const RecipeCard = ({ recipe, index, isShow, isExpanded, handleRemoveRecipe }) => {
     function limitWords(text, limit) {
         return text.split(' ').slice(0, limit).join(' ') + '...';
     }
     return (
-        <div className=' p-2 m-2 bg-pink-300 shadow-md rounded-lg  '>
-            <div key={recipe.id} className="bg-pink-200 shadow-md p-4 m-4 rounded-md">
+        <div className='p-2 m-2 bg-pink-300 shadow-md rounded-lg'>
+            <div key={recipe.id} className="bg-pink-200 shadow-md p-4 m-4 rounded-md h-64"> {/* Fixed height added here */}
                 <h3 className="text-2xl mb-2">{recipe.name}</h3>
-                {recipe.aiResponse ? <p className='text-left text-black-500 m-5 p-5 rounded  shadow-sm  rounded-e-3xl' dangerouslySetInnerHTML={{ __html: isExpanded==index ? marked.parse(recipe.aiResponse) : marked.parse(limitWords(recipe.aiResponse, 50)) }}></p> :
-                    <p> No recipe available </p>}
+                {recipe.aiResponse ? (
+                    <p
+                        className='text-left text-black-500 m-5 p-5 rounded shadow-sm rounded-e-3xl h-full overflow-hidden' // Use overflow-hidden to manage overflowing content
+                        dangerouslySetInnerHTML={{
+                            __html: isExpanded === index ? marked.parse(recipe.aiResponse) : marked.parse(limitWords(recipe.aiResponse, 50)),
+                        }}
+                    ></p>
+                ) : (
+                    <p>No recipe available</p>
+                )}
 
-                { recipe.aiResponse && recipe.aiResponse.length > 50 && isExpanded != index ? <button  onClick={() => isExpanded == index ? isShow(-1*index): isShow(index) } className=' bg-blue-500 p-2 m-2 rounded-md ' > {isExpanded == index ? 'Show Less' : 'Show More'} </button> : null }
-                <button className="bg-red-500 text-white px-4 py-2 rounded-md"
-                    onClick={() => handleRemoveRecipe(recipe)}> ⭐ </button>
+                {recipe.aiResponse && recipe.aiResponse.length > 50 && isExpanded !== index ? (
+                    <button
+                        onClick={() => isExpanded === index ? isShow(-1 * index) : isShow(index)}
+                        className='bg-blue-500 p-2 m-2 rounded-md'
+                    >
+                        {isExpanded === index ? 'Show Less' : 'Show More'}
+                    </button>
+                ) : null}
+                <button
+                    className="bg-red-500 text-white px-4 py-2 rounded-md"
+                    onClick={() => handleRemoveRecipe(recipe)}
+                >
+                    ⭐
+                </button>
             </div>
         </div>
     );
 }
-
 
 const RecipeStore = () => {
     const dispatch = useDispatch();
@@ -41,7 +58,7 @@ const RecipeStore = () => {
     }
 
     return (
-        <div className="p-4">
+        <div className="flex flex-col items-center justify-center h-[100vh] p-4">  
             <h1 className="text-2xl font-bold mb-4">RecipeStore</h1>
             <div className="grid grid-cols-1 gap-4">
                 {recipes.map((recipe, index) => (
@@ -63,6 +80,6 @@ const RecipeStore = () => {
             </button>
         </div>
     );
-}
+};
 
 export default RecipeStore;
