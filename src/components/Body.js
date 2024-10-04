@@ -62,15 +62,16 @@ const Body = () => {
   
   return (
     <>
-      <div className="p-4  text-center rounded-xl mx-40 ">
-        <input
-                    data-testid="search-input"
-          className="text-center px-40 py-1 border-2 border-gray-300 rounded-md :focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent"
-          type="text"
-          placeholder="Search"
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-        />
+      <div className="p-4  text-center rounded-xl mx-10 justify-items-center ">
+      <input
+  data-testid="search-input"
+  className="text-center w-64 border-2 mb-6 border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent"
+  type="text"
+  placeholder="Search"
+  value={search}
+  onChange={(e) => setSearch(e.target.value)}
+/>
+
         <button
                     data-testid="search-btn"
           className="px-2 py-1 bg-pink-300  text-white rounded-md ml-2 hover:bg-pink-500 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-opacity-50"
