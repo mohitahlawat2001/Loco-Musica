@@ -13,17 +13,23 @@ const RestanurantMenu = () => {
   const [displayCount, setDisplayCount] = useState(10);
   const { id } = useParams();
   const dispatch = useDispatch();
-  
+
+  // Local state to track clicked button id
+  const [clickedButtonId, setClickedButtonId] = useState(null);
+
   // Get the cart state
   const cart = useSelector((state) => state.cart.items);
 
   const handleAddToCart = (item) => {
     // Check if the item already exists in the cart
-    const existingItem = cart.find(cartItem => cartItem?.card?.info?.id === item?.card?.info?.id);
-    
+    const existingItem = cart.find(
+      (cartItem) => cartItem?.card?.info?.id === item?.card?.info?.id
+    );
+
     if (!existingItem) {
       // If the item doesn't exist, add it to the cart
       dispatch(addToCart(item));
+      setClickedButtonId(item?.card?.info?.id); // Set the id of the clicked button
     } else {
       // Optionally, you can show a message if the item is already in the cart
       alert("Item already in the cart. You can increase the quantity in the cart!");
@@ -86,11 +92,11 @@ const RestanurantMenu = () => {
               <li key={item?.card?.info?.id} className="mb-4">
                 <h3 className="text-2xl mb-2">{item?.card?.info?.name}</h3>
                 <p className="text-lg mb-2">{item?.card?.info?.description}</p>
-                {!item?.card?.info?.defaultPrice ? (
-                  <p className="text-lg mb-2">{item?.card?.info?.defaultPrice}</p>
-                ) : (
-                  <p className="text-lg mb-2">{item?.card?.info?.price}</p>
-                )}
+                <p className="text-lg mb-2">
+                  {!item?.card?.info?.defaultPrice
+                    ? item?.card?.info?.defaultPrice
+                    : item?.card?.info?.price}
+                </p>
 
                 <div className="flex justify-between items-center mt-4">
                   <Link
@@ -101,12 +107,20 @@ const RestanurantMenu = () => {
                       View Recipe
                     </button>
                   </Link>
+
+                  {/* Updated button logic */}
                   <button
-                    className="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition duration-300 ease-in-out"
+                    className={`${
+                      clickedButtonId === item?.card?.info?.id
+                        ? "bg-red-500"
+                        : "bg-blue-500"
+                    } text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition duration-300 ease-in-out`}
                     onClick={() => handleAddToCart(item)}
                     data-testid="addBtn"
                   >
-                    Add to Cart
+                    {clickedButtonId === item?.card?.info?.id
+                      ? "Added to Cart"
+                      : "Add to Cart"}
                   </button>
                 </div>
               </li>
