@@ -11,7 +11,7 @@ import { faCircleUser , faRightFromBracket } from "@fortawesome/free-solid-svg-i
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const Header = () => {
-  const { user ,setUser } = useContext(UserContext);
+  const { login,setLogin } = useContext(UserContext);
   const isOnline = useOnline();
   const cart = useSelector((state) => state.cart.items);
   const recipes = useSelector((state) => state.recipe.recipes);
@@ -63,7 +63,7 @@ const Header = () => {
         </ul>
       </div>
       <div className="p-3 m-2 ">
-        {user.login ? 
+        {login ? 
             <div onClick={handleLogout}>
               {/* <img src={Logout} alt="logout" className="h-9 w-9 mx-2" />  */}
               <FontAwesomeIcon icon={faRightFromBracket} size="2xl" />

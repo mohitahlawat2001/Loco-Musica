@@ -3,7 +3,7 @@ import UserContext from "../utils/useContext";
 import { useContext } from "react";
 
 const Footer = () => {
-        const { user } = useContext(UserContext);
+        const { name,email } = useContext(UserContext);
         return (
                 <div className="bg-gray-900 text-white py-4 mt-4">
                         <div className="flex flex-row justify-around" >
@@ -12,8 +12,8 @@ const Footer = () => {
                         </h1>
                         </div>
                         <div className="container mx-auto px-4">
-                                <p className="text-center">Welcome {user.name}!</p>
-                                <p className="text-center">Email: {user.email}</p>
+                                <p className="text-center">Welcome {name}!</p>
+                                <p className="text-center">Email: {email}</p>
                         </div>
                         </div>
 
