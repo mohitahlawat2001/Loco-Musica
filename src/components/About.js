@@ -6,7 +6,7 @@ import { useState } from "react";
 
 
 const About = () => {
-    const { user } = useContext(UserContext);
+    const { name ,email } = useContext(UserContext);
     const [linkTo, setLinkTo] = useState("/about/profile");
 
     const toggleLink = () => {
@@ -21,7 +21,7 @@ const About = () => {
         </Link>
 
             <h2 className="text-xl font-semibold text-center mt-4">
-                Welcome {user.name}!
+                Welcome {name}!
             </h2>
             <Outlet />
 
