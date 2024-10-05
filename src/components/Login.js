@@ -22,7 +22,7 @@ const Login = () => {
 
 
     return (
-        <div className="flex flex-row items-center justify-around h-screen bg-gray-100">
+        <div className="flex flex-wrap items-center justify-around h-screen bg-gray-100">
             <div  >
                 <img src={Mascot} alt="mascot" className="w-full shadow-sm -mt-24" />
             </div>

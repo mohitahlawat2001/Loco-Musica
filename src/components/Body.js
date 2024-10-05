@@ -84,7 +84,8 @@ const Body = () => {
 
   return (
     <>
-      <div className="p-4 text-center rounded-xl mx-40 ">
+      <div className="p-4 text-center rounded-xl mx-40 flex flex-wrap space-y-2 justify-center">
+      
         <input
           data-testid="search-input"
           className="text-center px-40 py-1 border-2 border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent"
@@ -103,6 +104,7 @@ const Body = () => {
         >
           Search
         </button>
+       
       </div>
       {error && (
         <p className="text-center text-red-500 font-bold p-2">{error}</p>
