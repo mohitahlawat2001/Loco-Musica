@@ -1,14 +1,15 @@
 import { useSelector, useDispatch } from "react-redux";
 import { clearCart, removeFromCart } from "../utils/cartSlice"; 
-import { useState } from "react"; 
+import React, { useState } from 'react';
 
 const Cart = () => {
     const cart = useSelector((state) => state.cart.items);
     const dispatch = useDispatch();
 
+    // Initialize quantities state based on cart items
     const [quantities, setQuantities] = useState(
         cart.reduce((acc, item) => {
-            acc[item?.card?.info?.id] = 1;
+            acc[item?.card?.info?.id] = 1; // Initialize each item quantity to 1
             return acc;
         }, {})
     );
@@ -26,25 +27,23 @@ const Cart = () => {
         const currentQuantity = quantities[itemId];
 
         if (operation === "increase") {
-            setQuantities({
-                ...quantities,
+            setQuantities((prevQuantities) => ({
+                ...prevQuantities,
                 [itemId]: currentQuantity + 1,
-            });
+            }));
         } else if (operation === "decrease" && currentQuantity > 1) {
-            setQuantities({
-                ...quantities,
+            setQuantities((prevQuantities) => ({
+                ...prevQuantities,
                 [itemId]: currentQuantity - 1,
-            });
+            }));
         }
     };
 
     const totalPrice = () => {
-        let total = 0;
-        cart.forEach((item) => {
+        return cart.reduce((total, item) => {
             const itemPrice = item?.card?.info?.price || item?.card?.info?.defaultPrice;
-            total += itemPrice * quantities[item?.card?.info?.id];
-        });
-        return total;
+            return total + (itemPrice * quantities[item?.card?.info?.id]) / 100; // Ensure price is in the correct format
+        }, 0);
     };
 
     if (cart.length === 0) {
@@ -106,7 +105,7 @@ const Cart = () => {
             </div>
 
             <div className="mt-4">
-                <h2 className="text-2xl font-bold">Total: ₹{totalPrice() / 100}</h2>
+                <h2 className="text-2xl font-bold">Total: ₹{totalPrice()}</h2>
             </div>
         </div>
     );

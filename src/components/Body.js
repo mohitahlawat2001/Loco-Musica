@@ -94,10 +94,10 @@ const Body = () => {
   value={search}
   onChange={(e) => setSearch(e.target.value)}
 />
-      <div className="p-4 text-center rounded-xl mx-40 ">
+      <div className=" text-center rounded-xl  ">
         <input
           data-testid="search-input"
-          className="text-center px-40 py-1 border-2 border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent"
+          className="text-center w-64 border-2 mb-6 border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent"
           type="text"
           placeholder="Search"
           value={search}
@@ -105,7 +105,7 @@ const Body = () => {
         />
         <button
           data-testid="search-btn"
-          className="px-2 py-1 bg-pink-300 text-white rounded-md ml-2 hover:bg-pink-500 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-opacity-50"
+          className="px-2 py-1 bg-pink-300 mb-3 text-white rounded-md ml-2 hover:bg-pink-500 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-opacity-50"
           onClick={() => {
             // Trigger search on button click (optional; can also rely on input change)
             setSearch(search);
@@ -127,8 +127,9 @@ const Body = () => {
           {filteredRestaurants.map((restaurant) => (
             <RestaurantCard key={restaurant?.info.id} {...restaurant?.info} />
           ))}
-        </div>
-      )}
+          </div>
+        )}
+      </div>
     </>
   );
 };

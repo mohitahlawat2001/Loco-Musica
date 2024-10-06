@@ -53,22 +53,22 @@ const [isMenuOpen , setMenuOpen] = useState(false);
         {/* Navigation Links */}
         <div className={`w-full md:w-auto ${isMenuOpen ? "block" : "hidden"} md:block`} >
           <ul className="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-5 p-3 m-2">
-            <li>
-              <Link to="/">Home</Link>
+            <li >
+              <Link className="hover:text-pink-300 transform transition-transform duration-300 scale-100 hover:text-xl" to="/">Home</Link>
             </li>
             <li>
-              <Link to="/about">About</Link>
+              <Link className="hover:text-pink-300 transform transition-transform duration-300 scale-100 hover:text-xl" to="/about">About</Link>
             </li>
             <li>
-              <Link to="/contact">Contact</Link>
+              <Link className="hover:text-pink-300 transform transition-transform duration-300 scale-100 hover:text-xl" to="/contact">Contact</Link>
             </li>
             <li>
-              <Link className="flex items-center" to="/recipeStore">
+              <Link className="flex items-center hover:text-pink-300 transform transition-transform duration-300 scale-100 hover:text-xl" to="/recipeStore">
                 <img src={RecipeStore} alt="recipeStore" className="h-5 w-5 mx-2" /> - <span className="mx-2">{recipes.length}</span>
               </Link>
             </li>
             <li>
-              <Link className="flex items-center" data-testid="cart" to="/cart">
+              <Link className="flex items-center hover:text-pink-300 transform transition-transform duration-300 scale-100 hover:text-xl" data-testid="cart" to="/cart">
                 <img src={Cart} alt="cart" className="h-5 w-5 mx-2" /> - <span className="mx-2">{cart.length}</span>
               </Link>
             </li>
