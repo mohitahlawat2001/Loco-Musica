@@ -2,10 +2,13 @@ import UserContext from "../utils/useContext";
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Mascot from "../assets/mascot.png";
+// Uncomment if you want to use Google Login
+// import GoogleLogin from "./GoogleLogin";
+
 const Login = () => {
-    const { setName,  setEmail,setLogin} = useContext(UserContext);
-    const [name, setNamee] = useState('');
-    const [email, setEmaill] = useState('');
+    const { setName, setEmail, setLogin, user, setUser } = useContext(UserContext);
+    const [name, setNameInput] = useState('');
+    const [email, setEmailInput] = useState('');
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
 
@@ -17,8 +20,8 @@ const Login = () => {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
-            }, credentials: 'include',
-            
+            },
+            credentials: 'include',
             body: JSON.stringify({
                 name,
                 email,
@@ -28,13 +31,14 @@ const Login = () => {
 
         const data = await response.json();
 
-       
-            // Assuming setUser updates the user in your context
-            setName(name);
-            setEmail(email);
-            setLogin(true);
-            navigate('/');
-      
+        // Assuming setUser updates the user in your context
+        setName(name);
+        setEmail(email);
+        setLogin(true);
+        // Uncomment the following line if you are using setUser
+        // setUser({ ...user, name: name, email: email, password: password, login: true });
+
+        navigate('/');
     };
 
     return (
@@ -47,18 +51,51 @@ const Login = () => {
                 <form className="mt-4" onSubmit={handleLogin}>
                     <div className="mb-6">
                         <label htmlFor="name" className="block mb-2 text-sm text-gray-600 dark:text-gray-400">Name</label>
-                        <input value={name} onChange={(e) => setNamee(e.target.value)} type="text" name="name" id="name" placeholder="Enter Name" className="w-full p-3 rounded border border-gray-200 outline-none focus:border-gray-500" />
+                        <input 
+                            value={name} 
+                            onChange={(e) => setNameInput(e.target.value)} 
+                            type="text" 
+                            name="name" 
+                            id="name" 
+                            placeholder="Enter Name" 
+                            className="w-full p-3 rounded border border-gray-200 outline-none focus:border-gray-500" 
+                        />
                     </div>
                     <div className="mb-6">
                         <label htmlFor="email" className="block mb-2 text-sm text-gray-600 dark:text-gray-400">Email Address</label>
-                        <input type="email" name="email" id="email" placeholder="Enter Email Address" value={email} onChange={(e) => setEmaill(e.target.value)} className="w-full p-3 rounded border border-gray-200 outline-none focus:border-gray-500" />
+                        <input 
+                            type="email" 
+                            name="email" 
+                            id="email" 
+                            placeholder="Enter Email Address" 
+                            value={email} 
+                            onChange={(e) => setEmailInput(e.target.value)} 
+                            className="w-full p-3 rounded border border-gray-200 outline-none focus:border-gray-500" 
+                        />
                     </div>
                     <div className="mb-6">
                         <label htmlFor="password" className="block mb-2 text-sm text-gray-600 dark:text-gray-400">Password</label>
-                        <input type="password" name="password" id="password" placeholder="Enter Password" value={password} onChange={(e) => setPassword(e.target.value)} className="w-full p-3 rounded border border-gray-200 outline-none focus:border-gray-500" />
+                        <input 
+                            type="password" 
+                            name="password" 
+                            id="password" 
+                            placeholder="Enter Password" 
+                            value={password} 
+                            onChange={(e) => setPassword(e.target.value)} 
+                            className="w-full p-3 rounded border border-gray-200 outline-none focus:border-gray-500" 
+                        />
                     </div>
                     <button type="submit" className="w-full bg-yellow-500 py-3 rounded text-white hover:bg-yellow-400">Login</button>
                 </form>
+                {/* Uncomment if you want to use Google Login */}
+                {/* <div className="flex items-center w-full my-6">
+                    <div className="flex-grow border-t border-gray-300"></div>
+                    <span className="px-4 text-gray-500 font-semibold">OR</span>
+                    <div className="flex-grow border-t border-gray-300"></div>
+                </div>
+                <div className="flex justify-center">
+                    <GoogleLogin />
+                </div> */}
             </div>
         </div>
     );
