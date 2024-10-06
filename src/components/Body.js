@@ -86,14 +86,14 @@ const Body = () => {
     <>
 
       <div className="p-4  text-center rounded-xl mx-10 justify-items-center ">
-      <input
+      {/* <input
   data-testid="search-input"
   className="text-center w-64 border-2 mb-6 border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent"
   type="text"
   placeholder="Search"
   value={search}
   onChange={(e) => setSearch(e.target.value)}
-/>
+/> */}
       <div className=" text-center rounded-xl  ">
         <input
           data-testid="search-input"
