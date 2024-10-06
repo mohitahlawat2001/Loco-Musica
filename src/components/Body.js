@@ -1,16 +1,18 @@
 import React, { useEffect, useState, useMemo } from "react"; // Import useMemo
 import { swiggyApi } from "../Constants";
-import { defaultLat,defaultLon } from "../Constants";
+import { defaultLat, defaultLon } from "../Constants";
 import RestaurantCard from "./RestaurantCard";
 import Shimmer from "./Shimmer";
 import { filterRestaurant } from "../utils/helper";
-
 
 const Body = () => {
   const [allRestaurants, setAllRestaurants] = useState([]);
   const [search, setSearch] = useState("");
   const [error, setError] = useState(null);
-  const [location, setLocation] = useState({ lat: defaultLat, lon: defaultLon });
+  const [location, setLocation] = useState({
+    lat: defaultLat,
+    lon: defaultLon,
+  });
 
   // Fetch restaurants based on user location or default
   useEffect(() => {
@@ -29,7 +31,10 @@ const Body = () => {
           getRestaurants(position.coords.latitude, position.coords.longitude);
         },
         (error) => {
-          console.error("Error fetching location, using default location.", error);
+          console.error(
+            "Error fetching location, using default location.",
+            error
+          );
           getRestaurants(defaultLat, defaultLon); // Fetch with default location
         }
       );
@@ -43,7 +48,7 @@ const Body = () => {
   const getRestaurants = async (lat, lon) => {
     try {
       const apiUrl = `https://foodfire.onrender.com/api/restaurants?lat=${lat}&lng=${lon}&page_type=DESKTOP_WEB_LISTING`;
-      //const apiUrl = `${swiggyApi}?lat=${lat}&lng=${lon}&page_type=DESKTOP_WEB_LISTING`; 
+      //const apiUrl = `${swiggyApi}?lat=${lat}&lng=${lon}&page_type=DESKTOP_WEB_LISTING`;
 
       const response = await fetch(apiUrl);
       const json = await response.json();
@@ -84,49 +89,48 @@ const Body = () => {
 
   return (
     <>
-
-      <div className="p-4  text-center rounded-xl mx-10 justify-items-center ">
-      {/* <input
+      <div className="p-4 mx-10 text-center rounded-xl justify-items-center ">
+        {/* <input
   data-testid="search-input"
-  className="text-center w-64 border-2 mb-6 border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent"
+  className="w-64 mb-6 text-center border-2 border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent"
   type="text"
   placeholder="Search"
   value={search}
   onChange={(e) => setSearch(e.target.value)}
 /> */}
-      <div className=" text-center rounded-xl  ">
-        <input
-          data-testid="search-input"
-          className="text-center w-64 border-2 mb-6 border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent"
-          type="text"
-          placeholder="Search"
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-        />
-        <button
-          data-testid="search-btn"
-          className="px-2 py-1 bg-pink-300 mb-3 text-white rounded-md ml-2 hover:bg-pink-500 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-opacity-50"
-          onClick={() => {
-            // Trigger search on button click (optional; can also rely on input change)
-            setSearch(search);
-          }}
-        >
-          Search
-        </button>
-      </div>
-      {error && (
-        <p className="text-center text-red-500 font-bold p-2">{error}</p>
-      )}
-      {allRestaurants?.length === 0 ? (
-        <Shimmer />
-      ) : (
-        <div
-          data-testid="res-list"
-          className="flex flex-wrap justify-center flex-row mx-20"
-        >
-          {filteredRestaurants.map((restaurant) => (
-            <RestaurantCard key={restaurant?.info.id} {...restaurant?.info} />
-          ))}
+        <div className="relative w-auto mb-4 text-center rounded-xl">
+          <input
+            data-testid="search-input"
+            className="w-full lg:w-[60%] p-4 text-sm text-gray-900 border-2 border-gray-300 rounded-md md:ps-10 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent"
+            type="text"
+            placeholder="Search your food"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+          />
+          <button
+            data-testid="search-btn"
+            className="absolute bg-pink-300 end-2.5 bottom-2.5 lg:right-64 font-medium rounded-lg text-sm px-4 py-2"
+            onClick={() => {
+              // Trigger search on button click (optional; can also rely on input change)
+              setSearch(search);
+            }}
+          >
+            Search
+          </button>
+        </div>
+        {error && (
+          <p className="p-2 font-bold text-center text-red-500">{error}</p>
+        )}
+        {allRestaurants?.length === 0 ? (
+          <Shimmer />
+        ) : (
+          <div
+            data-testid="res-list"
+            className="flex flex-row flex-wrap justify-center mx-20"
+          >
+            {filteredRestaurants.map((restaurant) => (
+              <RestaurantCard key={restaurant?.info.id} {...restaurant?.info} />
+            ))}
           </div>
         )}
       </div>
