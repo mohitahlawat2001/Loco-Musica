@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import useOnline from "../utils/useOnline";
 import { useSelector } from "react-redux";
 import Cart from "../assets/cart.png";
-import Loco from "../assets/loco.png";
 import RecipeStore from "../assets/recipeStore.png";
 import UserContext from "../utils/useContext";
 import { faCircleUser, faRightFromBracket, faBars } from "@fortawesome/free-solid-svg-icons";
@@ -18,12 +17,7 @@ const Header = () => {
   const [isMenuOpen, setMenuOpen] = useState(false);
 
   const handleLogout = () => {
-    setUser({
-      name: "Guest",
-      email: "email.com",
-      password: "password",
-      login: false,
-    });
+   setLogin(false);
   };
 
   const toggleMenu = () => {
@@ -33,16 +27,7 @@ const Header = () => {
   return (
     <>
       <div className="flex justify-between items-center bg-transparent shadow-md my-2 py-2 px-4 flex-wrap">
-        <div className="my-2">
-          <Link to="/">
-            <img
-              src={Loco}
-              alt="logo"
-              data-testid="logo"
-              className="h-12 w-12 shadow-sm border rounded-tr-lg rounded-bl-lg"
-            />
-          </Link>
-        </div>
+    
 
         {/* Hamburger Icon */}
         <div className="md:hidden flex items-center" onClick={toggleMenu}>
