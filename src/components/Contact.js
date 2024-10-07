@@ -17,7 +17,7 @@ const Contact = () => {
           <li className="mb-2">
             <Link to="https://www.linkedin.com/in/mohitahlawat/" className='mx-2' >
           <FontAwesomeIcon icon={faLinkedin} /> 
-          </Link> Connet with me on LinkedIn
+          </Link> Connect with me on LinkedIn
                  </li>
           <li className="mb-2">
             <Link to="https://www.github.com/mohitahlawat2001/" className='mx-2' >
