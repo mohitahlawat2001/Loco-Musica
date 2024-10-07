@@ -1,4 +1,5 @@
 import React, { useState, useContext } from "react";
+
 import { Link } from "react-router-dom";
 import useOnline from "../utils/useOnline";
 import { useSelector } from "react-redux";
@@ -11,12 +12,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const Header = () => {
   const { login, setLogin, user, setUser } = useContext(UserContext);
+
   const isOnline = useOnline();
   const cart = useSelector((state) => state.cart.items);
   const recipes = useSelector((state) => state.recipe.recipes);
 
-  const [isMenuOpen, setMenuOpen] = useState(false);
 
+const [isMenuOpen , setMenuOpen] = useState(false);
   const handleLogout = () => {
     setUser({
       name: "Guest",
@@ -63,11 +65,13 @@ const Header = () => {
             </li>
             <li>
               <Link className="flex items-center hover:text-pink-300" to="/recipeStore">
+
                 <img src={RecipeStore} alt="recipeStore" className="h-5 w-5 mx-2" /> - <span className="mx-2">{recipes.length}</span>
               </Link>
             </li>
             <li>
               <Link className="flex items-center hover:text-pink-300" data-testid="cart" to="/cart">
+
                 <img src={Cart} alt="cart" className="h-5 w-5 mx-2" /> - <span className="mx-2">{cart.length}</span>
               </Link>
             </li>
@@ -75,7 +79,8 @@ const Header = () => {
         </div>
 
         <div className="p-3 m-2">
-          {login ? (
+
+          {user.login ? (
             <div onClick={handleLogout}>
               <FontAwesomeIcon icon={faRightFromBracket} size="2xl" />
             </div>
