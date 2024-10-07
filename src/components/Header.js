@@ -31,12 +31,10 @@ const [isMenuOpen , setMenuOpen] = useState(false);
       <div className="flex justify-between items-center bg-transparent shadow-md my-2 py-2 px-4 flex-wrap">
     
 
-        {/* Hamburger Icon */}
         <div className="md:hidden flex items-center" onClick={toggleMenu}>
           <FontAwesomeIcon icon={faBars} size="2xl" />
         </div>
 
-        {/* Navigation Links */}
         <div className={`w-full md:w-auto ${isMenuOpen ? "block" : "hidden"} md:block`}>
           <ul className="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-5 p-3 m-2">
             <li>

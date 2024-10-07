@@ -9,7 +9,7 @@ const Profile = () => {
             <div className="bg-white shadow-lg rounded-lg p-8 w-full max-w-sm">
                 <h1 className="text-2xl font-bold text-gray-800 mb-4 text-center">Profile</h1>
                 <div className="flex flex-col items-center space-y-4">
-                    { login ? ( // Check if user is logged in
+                    { login ? ( 
                         <div className="text-center">
                             <p className="text-lg font-medium text-gray-700">Name: <span className="font-semibold">{name}</span></p>
                             <p className="text-lg font-medium text-gray-700">Email: <span className="font-semibold">{email}</span></p>
