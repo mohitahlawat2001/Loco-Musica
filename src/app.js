@@ -16,23 +16,23 @@ import Recipe from "./components/Recipe";
 import RecipeStore from "./components/RecipeStore";
 import Login from "./components/Login";
 import { FallbackShimmer } from "./components/Shimmer";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';  // Import globally
 
 const About = lazy(() => import("./components/About"));
 const Contact = lazy(() => import("./components/Contact"));
 
 const AppLayout = () => {
-  const [user, setUser] = useState({
-      name: "Guest",
-      email: "email.com",
-      password: "password",
-  });
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
   const [login, setLogin] = useState(false);
   return (
     <Provider store={store}>
-    <UserContext.Provider value={{ user: user, setUser: setUser , login:login , setLogin:setLogin  }}>
+    <UserContext.Provider value={{ name,setName, email,setEmail , login, setLogin  }}>
       <Header />
       <Outlet />
       <Footer />
+      <ToastContainer position="bottom-right" autoClose={5000} hideProgressBar />
       </UserContext.Provider>
       </Provider>
   );
