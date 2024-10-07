@@ -63,7 +63,7 @@ const [isMenuOpen , setMenuOpen] = useState(false);
 
         <div className="p-3 m-2">
 
-          {user.login ? (
+          {login ? (
             <div onClick={handleLogout}>
               <FontAwesomeIcon icon={faRightFromBracket} size="2xl" />
             </div>

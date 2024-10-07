@@ -112,9 +112,7 @@ const Login = () => {
                 </div> */}
 
 
-                <div className="flex justify-center">
-                    <GoogleLogin/>
-                </div>
+                
             </div>
         </div>
     );
