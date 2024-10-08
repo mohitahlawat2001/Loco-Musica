@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useMemo } from "react"; // Import useMemo
-import { swiggyApi } from "../Constants";
+// import { swiggyApi } from "../Constants";
 import { defaultLat, defaultLon } from "../Constants";
 import RestaurantCard from "./RestaurantCard";
 import Shimmer from "./Shimmer";
