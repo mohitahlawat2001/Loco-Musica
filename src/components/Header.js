@@ -30,69 +30,76 @@ const [isMenuOpen , setMenuOpen] = useState(false);
 
   return (
     <>
-      <div className="flex justify-between items-center bg-transparent shadow-md my-2 py-2 px-4 flex-wrap">
-      <div className="my-2 hidden lg:block ">
-          <Link to="/">
-            <img
-              src={Loco}
-              alt="logo"
-              data-testid="logo"
-              className="h-12 w-12 shadow-sm border rounded-tr-lg rounded-bl-lg"
-            />
-          </Link>
-        </div>
+    <div className="max-w-screen-lg mx-auto flex justify-between items-center border border-gray-300 rounded-lg shadow-md mt-4 py-1 px-4 flex-wrap sticky top-0 z-10 bg-white mix-blend-normal">
+  <div className="my-2 hidden lg:block">
+    <Link to="/">
+      <img
+        src={Loco}
+        alt="logo"
+        data-testid="logo"
+        className="h-10 w-10 shadow-sm border rounded-tr-lg rounded-bl-lg"
+      />
+    </Link>
+  </div>
 
-        <div className="md:hidden flex items-center" onClick={toggleMenu}>
-          <FontAwesomeIcon icon={faBars} size="2xl" />
-        </div>
+  <div className="md:hidden flex items-center" onClick={toggleMenu}>
+    <FontAwesomeIcon icon={faBars} size="2xl" />
+  </div>
 
-        <div className={`w-full md:w-auto ${isMenuOpen ? "block" : "hidden"} md:block`}>
-          <ul className="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-5 p-3 m-2">
-            <li>
-              <Link className="hover:text-pink-300" to="/">Home</Link>
-            </li>
-            <li>
-              <Link className="hover:text-pink-300" to="/about">About</Link>
-            </li>
-            <li>
-              <Link className="hover:text-pink-300" to="/contact">Contact</Link>
-            </li>
-            <li>
-              <Link className="flex items-center hover:text-pink-300" to="/recipeStore">
+  <div className={`w-full md:w-auto ${isMenuOpen ? "block" : "hidden"} md:block`}>
+    <ul className="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-5 p-2 m-2">
+    <li>
+  <Link className="relative inline-block hover:text-pink-300 font-bold transition-transform duration-300 transform hover:scale-105" to="/">
+    Home
+    <span className="absolute left-0 bottom-0 h-1 bg-pink-300 transform scale-x-0 transition-transform duration-300 origin-right hover:scale-x-100"></span>
+  </Link>
+</li>
+      <li>
+        <Link className="relative inline-block hover:text-pink-300 font-bold transition-transform duration-300 transform hover:scale-105" to="/about">About
+        <span className="absolute left-0 bottom-0 h-1 bg-pink-300 transform scale-x-0 transition-transform duration-300 origin-right hover:scale-x-100"></span>
+        </Link>
+      </li>
+      <li>
+        <Link className="relative inline-block hover:text-pink-300 font-bold transition-transform duration-300 transform hover:scale-105" to="/contact">Contact
+        <span className="absolute left-0 bottom-0 h-1 bg-pink-300 transform scale-x-0 transition-transform duration-300 origin-right hover:scale-x-100"></span>
+        </Link>
+      </li>
+      <li>
+        <Link className="flex items-center hover:text-pink-300 font-bold transition-transform duration-300 transform hover:scale-105" to="/recipeStore">
+          <img src={RecipeStore} alt="recipeStore" className="h-5 w-5 mx-2 transition-transform duration-300 transform hover:scale-105" />
+          <span className="mx-2">{recipes.length}</span>
+        </Link>
+      </li>
+      <li>
+        <Link className="flex items-center hover:text-pink-300 font-bold transition-transform duration-300 transform hover:scale-105" data-testid="cart" to="/cart">
+          <img src={Cart} alt="cart" className="h-5 w-5 mx-2 transition-transform duration-300 transform hover:scale-105" />
+          <span className="mx-2">{cart.length}</span>
+        </Link>
+      </li>
+    </ul>
+  </div>
 
-                <img src={RecipeStore} alt="recipeStore" className="h-5 w-5 mx-2" /> - <span className="mx-2">{recipes.length}</span>
-              </Link>
-            </li>
-            <li>
-              <Link className="flex items-center hover:text-pink-300" data-testid="cart" to="/cart">
-
-                <img src={Cart} alt="cart" className="h-5 w-5 mx-2" /> - <span className="mx-2">{cart.length}</span>
-              </Link>
-            </li>
-          </ul>
-        </div>
-
-        <div className="p-3 m-2">
-
-          {login ? (
-            <div onClick={handleLogout}>
-              <FontAwesomeIcon icon={faRightFromBracket} size="2xl" />
-            </div>
-          ) : (
-            <Link to="/login">
-              <FontAwesomeIcon icon={faCircleUser} size="2xl" />
-            </Link>
-          )}
-        </div>
+  <div className="p-2 m-2">
+    {login ? (
+      <div onClick={handleLogout}>
+        <FontAwesomeIcon icon={faRightFromBracket} size="2xl" />
       </div>
+    ) : (
+      <Link to="/login">
+        <FontAwesomeIcon icon={faCircleUser} size="2xl" />
+      </Link>
+    )}
+  </div>
+</div>
 
-      <h1 data-testid="online-status">
-        {isOnline ? (
-          <div className="border mx-auto bg-green-400 rounded-md h-2 w-1/2 md:w-1/3" />
-        ) : (
-          <div className="border mx-auto bg-red-400 rounded-md h-2 w-1/2 md:w-1/3" />
-        )}
-      </h1>
+<h1 data-testid="online-status">
+  {isOnline ? (
+    <div className="border mx-auto bg-green-400 rounded-md h-2 w-1/2 md:w-1/3" />
+  ) : (
+    <div className="border mx-auto bg-red-400 rounded-md h-2 w-1/2 md:w-1/3" />
+  )}
+</h1>
+
     </>
   );
 };
