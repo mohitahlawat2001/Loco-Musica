@@ -42,7 +42,7 @@ const RestanurantMenu = () => {
         <RestaurantShimmer />
       ) : (
         <div
-          className="mx-2 bg-pink-300 text-white p-6 rounded-lg mt-4 shadow-lg"
+          className="mx-2 bg-pink-300 text-white p-6 rounded-lg mt-1 shadow-lg"
           key={restaurant.id}
         >
           <h2 className="text-3xl font-bold mb-3">{restaurant?.name}</h2>
