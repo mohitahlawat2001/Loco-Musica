@@ -34,10 +34,11 @@ const Shimmer = () => {
 
 export const RestaurantShimmer = () => {
     return (
-        <div className="mx-2 bg-pink-300 text-white p-4 rounded-lg mt-1 animate-shimmer">
+        <div className="mx-2 bg-pink-300 text-white p-4 rounded-lg mt-1 animate-shimmer h-fit">
             <div className="h-8 mb-4 bg-gray-300 rounded"></div>
-            <div className="h-6 mb-2 bg-gray-300 rounded"></div>
             <div className="w-72 h-72 mb-2 bg-gray-300 rounded-md overflow-hidden "></div>
+            <div className="h-6 mb-2 bg-gray-300 rounded"></div>
+            <div className="h-6 mb-2 bg-gray-300 rounded"></div>
             <div className="h-6 mb-2 bg-gray-300 rounded"></div>
             <div className="h-6 mb-2 bg-gray-300 rounded"></div>
             <div className="h-10 bg-gray-300 rounded"></div>
@@ -47,7 +48,7 @@ export const RestaurantShimmer = () => {
 
 export const MenuShimmer = () => {
     return (
-        <div className="mx-3 bg-gray-800 text-white p-4 rounded-lg mt-1 animate-shimmer w-full">
+        <div className="mx-3 bg-gray-800 text-white p-4 rounded-lg mt-1 animate-shimmer w-auto col-start-2 col-end-5">
             <div className="h-8 m-4 bg-gray-300 rounded grid-cols-1 "></div>
             <ul>
                 {[...Array(9)].map((_, index) => (
