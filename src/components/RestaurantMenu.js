@@ -37,36 +37,34 @@ const RestanurantMenu = () => {
   const { restaurant, menu } = useRestaurant(id);
 
   return (
-    <div className="flex justify-around">
+    <div className="grid grid-cols-4">
       {!restaurant ? (
         <RestaurantShimmer />
       ) : (
         <div
-          className="mx-2 bg-pink-300 text-white p-6 rounded-lg mt-4 shadow-lg"
+          className="mx-2 bg-pink-300 text-white p-6 rounded-lg mt-1 shadow-lg h-fit sticky top-3"
           key={restaurant.id}
         >
           <h2 className="text-3xl font-bold mb-3">{restaurant?.name}</h2>
-          <div className="w-72 h-72 rounded-md overflow-hidden mb-3">
+          <div className="h-72 rounded-md overflow-hidden mb-3">
             <img
               src={IMG_URL + restaurant?.cloudinaryImageId}
               alt="restaurant"
-              className="w-full h-full object-cover rounded-lg transition-transform duration-200 ease-in-out transform hover:scale-105"
+              className="w-full h-full object-cover bg-center rounded-lg transition-transform duration-200 ease-in-out transform hover:scale-105"
             />
           </div>
-          <div className="space-y-2">
+          <div className="space-y-1">
             <p className="text-lg font-semibold">
               {restaurant?.cuisines.join(", ")}
             </p>
-            <p className="text-md">{restaurant?.city}</p>
-            <p className="text-md">{restaurant?.areaName}</p>
+            <p className="text-md">{restaurant?.areaName}, {restaurant?.city}</p>
             <p className="text-md">{restaurant?.costForTwoMessage}</p>
             <p className="text-lg flex items-center">
               <span className="text-yellow-400 mr-1">
                 <FontAwesomeIcon icon={faStar} style={{ color: "#FFD43B" }} />
               </span>{" "}
-              {restaurant?.avgRating}
+              {restaurant?.avgRating}, {restaurant?.totalRatingsString}
             </p>
-            <p className="text-md">{restaurant?.totalRatingsString}</p>
             <p className="text-md">
               Close Time: {restaurant?.availability?.nextCloseTime}
             </p>
@@ -80,7 +78,7 @@ const RestanurantMenu = () => {
       {!menu ? (
         <MenuShimmer />
       ) : (
-        <div className="mx-3 bg-gray-800 text-white p-4 rounded-lg mt-1 w-full">
+        <div className="mx-3 bg-gray-800 text-white p-4 rounded-lg mt-1 w-auto col-start-2 col-end-5">
           <h1 className="text-3xl font-bold mb-4">Menu</h1>
           <ul data-testid="menu">
             {Object.values(menu)
