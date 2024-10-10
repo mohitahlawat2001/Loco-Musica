@@ -1,12 +1,12 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope, faArrowRight } from "@fortawesome/free-solid-svg-icons";
-import { faFacebookF, faTwitter, faWhatsapp, faInstagram } from "@fortawesome/free-brands-svg-icons";
+import { faFacebookF, faWhatsapp, faInstagram, faGithub, faXTwitter } from "@fortawesome/free-brands-svg-icons";
 
 const Footer = () => {
     return (
         <footer
-            className="bg-gradient-to-r from-blue-900 to-purple-900 text-white py-16 rounded-tl-[100px] rounded-tr-none"
+            className="bg-gradient-to-r from-blue-900 to-purple-900 text-white py-16 rounded-tl-[100px] rounded-tr-[100px] "
             style={{ background: "linear-gradient(to right, #00093c, #4e014e)" }}
         >
             <div className="flex flex-wrap justify-between container mx-auto px-4">
@@ -58,13 +58,16 @@ const Footer = () => {
                             <FontAwesomeIcon icon={faFacebookF} className="bg-white text-black w-8 h-8 flex items-center justify-center rounded-full p-1" />
                         </a>
                         <a href="#" className="text-white">
-                            <FontAwesomeIcon icon={faTwitter} className="bg-white text-black w-8 h-8 flex items-center justify-center rounded-full p-1" />
+                            <FontAwesomeIcon icon={faXTwitter} className="bg-white text-black w-8 h-8 flex items-center justify-center rounded-full p-1" />
                         </a>
                         <a href="#" className="text-white">
                             <FontAwesomeIcon icon={faWhatsapp} className="bg-white text-black w-8 h-8 flex items-center justify-center rounded-full p-1" />
                         </a>
                         <a href="#" className="text-white">
                             <FontAwesomeIcon icon={faInstagram} className="bg-white text-black w-8 h-8 flex items-center justify-center rounded-full p-1" />
+                        </a>
+                        <a href="#" className="text-white">
+                            <FontAwesomeIcon icon={faGithub} className="bg-white text-black w-8 h-8 flex items-center justify-center rounded-full p-1" />
                         </a>
                     </div>
                 </div>
