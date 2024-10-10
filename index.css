@@ -27,4 +27,226 @@
 	background-color: #f383b9;
 }
 
+.bubbles {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	height: 100%;
+	pointer-events: none;
+	/* Ensure bubbles do not block interactions */
+	filter: url("#blob");
+	/* Reference the correct SVG filter */
+}
 
+.bubble {
+	position: absolute;
+	left: var(--position, 50%);
+	background: rgba(255, 255, 255, 0.3);
+	/* Semi-transparent for a soft effect */
+	border-radius: 100%;
+	animation: bubble-size var(--time, 4s) ease-in infinite var(--delay, 0s),
+		bubble-move var(--time, 4s) ease-in infinite var(--delay, 0s);
+	transform: translate(-50%, 100%);
+}
+
+@keyframes bubble-size {
+
+	0%,
+	75% {
+		width: var(--size, 4rem);
+		height: var(--size, 4rem);
+	}
+
+	100% {
+		width: 0rem;
+		height: 0rem;
+	}
+}
+
+@keyframes bubble-move {
+	0% {
+		bottom: -4rem;
+	}
+
+	100% {
+		bottom: var(--distance, 10rem);
+	}
+}
+
+/* From Uiverse.io by MijailVillegas */
+.card {
+	margin-top: 20px;
+	max-width: fit-content;
+	border-radius: 15px;
+	display: flex;
+	flex-direction: row;
+	align-content: center;
+	justify-content: center;
+	gap: 1rem;
+	backdrop-filter: blur(15px);
+	box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.192),
+		inset 0 0 5px rgba(255, 255, 255, 0.274), 0 5px 5px rgba(0, 0, 0, 0.164);
+	transition: 0.5s;
+}
+
+.card:hover {
+	animation: ease-out 5s;
+	background: rgba(173, 173, 173, 0.05);
+}
+
+.card ul {
+	padding: 1rem;
+	display: flex;
+	list-style: none;
+	gap: 1rem;
+	align-items: center;
+	justify-content: center;
+	align-content: center;
+	flex-wrap: wrap;
+	flex-direction: row;
+}
+
+.card ul li {
+	cursor: pointer;
+}
+
+.svg {
+	transition: all 0.3s;
+	/* if you find some problems change w - h : 30px*/
+	padding: 1rem;
+	height: 60px;
+	width: 60px;
+	border-radius: 100%;
+	color: rgb(231, 210, 19);
+	fill: currentColor;
+	box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.3),
+		inset 0 0 5px rgba(255, 255, 255, 0.5), 0 5px 5px rgba(0, 0, 0, 0.164);
+}
+
+.text {
+	opacity: 0;
+	border-radius: 5px;
+	font-weight: bold;
+	padding: 5px;
+	transition: all 0.3s;
+	color: rgb(231, 210, 19);
+	background-color: rgba(255, 255, 255, 0.3);
+	position: absolute;
+	z-index: 9999;
+	box-shadow: -5px 0 1px rgba(153, 153, 153, 0.2),
+		-10px 0 1px rgba(153, 153, 153, 0.2),
+		inset 0 0 20px rgba(255, 255, 255, 0.3),
+		inset 0 0 5px rgba(255, 255, 255, 0.5), 0 5px 5px rgba(0, 0, 0, 0.082);
+}
+
+/*isometric prooyection*/
+.iso-pro {
+	transition: 0.5s;
+}
+
+.iso-pro:hover a>.svg {
+	transform: translate(15px, -15px);
+	border-radius: 100%;
+}
+
+.iso-pro:hover .text {
+	opacity: 1;
+	transform: translate(25px, -2px) skew(-5deg);
+}
+
+.iso-pro:hover .svg {
+	transform: translate(5px, -5px);
+}
+
+.iso-pro span {
+	opacity: 0;
+	position: absolute;
+	color: #1877f2;
+	border-color: #1877f2;
+	box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.3),
+		inset 0 0 5px rgba(255, 255, 255, 0.5), 0 5px 5px rgba(0, 0, 0, 0.164);
+	border-radius: 50%;
+	transition: all 0.3s;
+	height: 60px;
+	width: 60px;
+}
+
+.iso-pro:hover span {
+	opacity: 1;
+}
+
+.iso-pro:hover span:nth-child(1) {
+	opacity: 0.2;
+}
+
+.iso-pro:hover span:nth-child(2) {
+	opacity: 0.4;
+	transform: translate(5px, -5px);
+}
+
+.iso-pro:hover span:nth-child(3) {
+	opacity: 0.6;
+	transform: translate(10px, -10px);
+}
+
+.inputbox {
+	position: relative;
+	width: 196px;
+}
+
+.inputbox input {
+	position: relative;
+	width: 100%;
+	padding: 20px 10px 10px;
+	background: transparent;
+	outline: none;
+	box-shadow: none;
+	border: none;
+	color: #23242a;
+	font-size: 1em;
+	letter-spacing: 0.05em;
+	transition: 0.5s;
+	z-index: 10;
+}
+
+.inputbox span {
+	position: absolute;
+	left: 0;
+	padding: 20px 10px 10px;
+	font-size: 1em;
+	color: #8f8f8f;
+	letter-spacing: 00.05em;
+	transition: 0.5s;
+	pointer-events: none;
+}
+
+.inputbox input:valid~span,
+.inputbox input:focus~span {
+	color: #ccb714;
+	transform: translateX(-10px) translateY(-34px);
+	font-size: 0, 75em;
+}
+
+.inputbox i {
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	width: 125%;
+	height: 2px;
+	background: #ccb714;
+	border-radius: 4px;
+	transition: 0.5s;
+	pointer-events: none;
+	z-index: 9;
+}
+
+.inputbox input:valid~i,
+.inputbox input:focus~i {
+	height: 44px;
+}
+
+.heading {
+	color: #ccb714;
+	font-weight: 500;
+}
