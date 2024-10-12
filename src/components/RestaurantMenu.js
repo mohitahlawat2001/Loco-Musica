@@ -37,12 +37,13 @@ const RestanurantMenu = () => {
   const { restaurant, menu } = useRestaurant(id);
 
   return (
-    <div className="grid grid-cols-4">
+    
+    <div className="grid grid-cols-4 ">
       {!restaurant ? (
         <RestaurantShimmer />
       ) : (
         <div
-          className="mx-2 bg-pink-300 text-white p-6 rounded-lg mt-1 shadow-lg h-fit sticky top-3"
+          className="mx-2 bg-pink-300 text-white p-6 rounded-lg mt-16 shadow-lg h-fit sticky top-3 "
           key={restaurant.id}
         >
           <h2 className="text-3xl font-bold mb-3">{restaurant?.name}</h2>
@@ -152,7 +153,8 @@ const RestanurantMenu = () => {
           )}
         </div>
       )}
-    </div>
+     </div>
+    
   );
 };
 

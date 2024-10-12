@@ -1,5 +1,5 @@
 import UserContext from "../utils/useContext";
-import { useContext, useState } from "react";
+import { useContext, useState,useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Mascot from "../assets/mascot.png";
 
@@ -10,7 +10,17 @@ const Login = () => {
 
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
+   
+    const [isDarkMode, setIsDarkMode] = useState(false);
 
+   
+    useEffect(() => {
+      const savedDarkMode = localStorage.getItem('darkMode') === 'true';
+      setIsDarkMode(savedDarkMode); 
+    });
+  
+    console.log("mode",isDarkMode)
+   
     const handleLogin = async (e) => {
         e.preventDefault();
 
@@ -38,11 +48,13 @@ const Login = () => {
 
 
     return (
-        <div className="flex flex-row items-center justify-around h-screen bg-gray-100">
+        <div className={isDarkMode ? "bg-gray-800 text-white" : "bg-white text-black"}>
+
+        <div className="flex flex-row items-center justify-around h-screen">
             <div>
                 <img src={Mascot} alt="mascot" className="w-full shadow-sm -mt-24" />
             </div>
-            <div className="bg-white p-8 w-1/2 rounded-lg shadow-lg ">
+            <div className=" p-8 w-1/2 rounded-lg shadow-lg ">
                 <h1 className="text-3xl font-bold text-center">Login</h1>
                 <form className="mt-4" onSubmit={handleLogin}>
                     <div className="mb-6">
@@ -114,6 +126,7 @@ const Login = () => {
 
                 
             </div>
+        </div>
         </div>
     );
 };

@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState,useEffect, useContext } from "react";
 
 import { Link } from "react-router-dom";
 import useOnline from "../utils/useOnline";
@@ -11,14 +11,14 @@ import UserContext from "../utils/useContext";
 import { faCircleUser, faRightFromBracket, faBars } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-const Header = () => {
+const Header = ({ toggleDarkMode, isDarkMode }) => {
+  
   const { login, setLogin, user, setUser } = useContext(UserContext);
 
   const isOnline = useOnline();
   const cart = useSelector((state) => state.cart.items);
   const recipes = useSelector((state) => state.recipe.recipes);
-
-
+ 
 const [isMenuOpen , setMenuOpen] = useState(false);
   const handleLogout = () => {
    setLogin(false);
@@ -28,9 +28,13 @@ const [isMenuOpen , setMenuOpen] = useState(false);
     setMenuOpen(!isMenuOpen);
   };
 
+
   return (
     <>
-    <div className="max-w-screen-lg mx-auto flex justify-between items-center border border-gray-300 rounded-lg shadow-md mt-4 py-1 px-4 sticky top-0 z-10 bg-white mix-blend-normal">
+    <div className={ isDarkMode ? "bg-gray-800" : "bg-white text-black" }>
+
+   
+    <div className="max-w-screen-lg mx-auto  flex justify-between items-center border border-gray-300 rounded-lg shadow-md  py-1 px-4 sticky top-0 z-10 mix-blend-normal">
   <div className="my-2  hidden md:block">
     <Link to="/">
       <img
@@ -78,6 +82,14 @@ const [isMenuOpen , setMenuOpen] = useState(false);
           <span className="mx-2">{cart.length}</span>
         </Link>
       </li>
+      <li>
+         <button
+      onClick={toggleDarkMode}
+      className="bg-pink-300 py-1 px-4 rounded-lg hover:bg-pink-400 transition duration-300 ease-in-out"
+    >
+      {isDarkMode ? "Light Mode" : "Dark Mode"}
+    </button>
+      </li>
     </ul>
   </div>
 
@@ -97,7 +109,7 @@ const [isMenuOpen , setMenuOpen] = useState(false);
 <h1 data-testid="online-status">
   <div className={`border mx-auto rounded-md h-2 w-1/2 md:w-1/3 ${isOnline ? 'bg-green-400' : 'bg-red-400'}`} />
 </h1>
-
+  </div>
     </>
   );
 };

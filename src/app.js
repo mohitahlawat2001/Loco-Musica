@@ -12,6 +12,7 @@ import UserContext from "./utils/useContext";
 import { Provider } from "react-redux";
 import store from "./utils/store";
 import Cart from "./components/Cart";
+import { useEffect } from "react";
 import Recipe from "./components/Recipe";
 import RecipeStore from "./components/RecipeStore";
 import Login from "./components/Login";
@@ -26,13 +27,25 @@ const AppLayout = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [login, setLogin] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(false);
+  useEffect(() => {
+    const storedDarkMode = localStorage.getItem('darkMode') === 'true';
+    setIsDarkMode(storedDarkMode);
+  }, []);
+  const toggleDarkMode = () => {
+    setIsDarkMode(!isDarkMode);
+    localStorage.setItem('darkMode', !isDarkMode);
+  };
   return (
     <Provider store={store}>
     <UserContext.Provider value={{ name,setName, email,setEmail , login, setLogin  }}>
-      <Header />
-      <Outlet />
-      <Footer />
-      <ToastContainer position="bottom-right" autoClose={5000} hideProgressBar />
+
+    <div className={isDarkMode ? "bg-gray-800 text-white" : "bg-white text-black"}>
+          <Header toggleDarkMode={toggleDarkMode} isDarkMode={isDarkMode} />
+          <Outlet />
+          <Footer />
+          <ToastContainer position="bottom-right" autoClose={5000} hideProgressBar />
+        </div>
       </UserContext.Provider>
       </Provider>
   );
@@ -82,7 +95,7 @@ const appRoute = createBrowserRouter([
         element: <RecipeStore/>
       },{
         path: "/login",
-        element: <Login/>,
+        element: <Login />,
       }
     ],
   },
