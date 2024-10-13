@@ -2,18 +2,25 @@ import { Link, Outlet } from "react-router-dom";
 import UserContext from "../utils/useContext";
 import { useContext } from "react";
 import Mascot from "../assets/mascot.png";
-import { useState } from "react";
+import { useState,useEffect } from "react";
 
 
 const About = () => {
     const { name ,email } = useContext(UserContext);
     const [linkTo, setLinkTo] = useState("/about/profile");
-
+    const [isDarkMode, setIsDarkMode] = useState(false);
+    useEffect(() => {
+      const savedDarkMode = localStorage.getItem('darkMode') === 'true';
+      setIsDarkMode(savedDarkMode); 
+    });
     const toggleLink = () => {
         setLinkTo(prevLinkTo => prevLinkTo === "/about/profile" ? "/about" : "/about/profile");
     }
     return (
-        <div className="bg-gray-200">
+       <div className={isDarkMode ? "bg-gray-800 text-white" : "bg-white text-black"}>
+
+       
+        <div className={isDarkMode ? "bg-gray-800 text-white" : "bg-white text-black"}>
                     <Link to={linkTo} onClick={toggleLink}>
             <button className="bg-green-500 text-white font-bold p-2 m-2 rounded-lg hover:bg-green-600">
                 Profile
@@ -25,7 +32,7 @@ const About = () => {
             </h2>
             <Outlet />
 
-            <section className="bg-white text-gray-800 py-12 my-5 mx-10">
+            <section className=" py-12 my-5 mx-10">
                 <div className="container mx-auto px-6 md:px-12 lg:px-24">
                     <h2 className="text-3xl font-bold mb-6 text-center">About Loco Musica</h2>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -62,6 +69,7 @@ const About = () => {
                 </Link>         
             </h2>
 
+        </div>
         </div>
     )
 };

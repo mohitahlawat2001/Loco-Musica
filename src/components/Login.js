@@ -19,7 +19,7 @@ const Login = () => {
       setIsDarkMode(savedDarkMode); 
     });
   
-    console.log("mode",isDarkMode)
+  
    
     const handleLogin = async (e) => {
         e.preventDefault();

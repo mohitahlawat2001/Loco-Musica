@@ -5,6 +5,7 @@ import useOnline from "../utils/useOnline";
 import { useSelector } from "react-redux";
 import Cart from "../assets/cart.png";
 import Loco from "../assets/loco.png";
+import dark from "../assets/dark.png"
 
 import RecipeStore from "../assets/recipeStore.png";
 import UserContext from "../utils/useContext";
@@ -31,10 +32,10 @@ const [isMenuOpen , setMenuOpen] = useState(false);
 
   return (
     <>
-    <div className={ isDarkMode ? "bg-gray-800" : "bg-white text-black" }>
+    <div className={`${ isDarkMode ? "bg-gray-800" : "bg-white text-black" } fixed`}>
 
    
-    <div className="max-w-screen-lg mx-auto  flex justify-between items-center border border-gray-300 rounded-lg shadow-md  py-1 px-4 sticky top-0 z-10 mix-blend-normal">
+    <div className=" max-w-screen-lg mx-auto  flex justify-between items-center border border-gray-300 rounded-lg shadow-md  py-1 px-4  top-0 z-10 mix-blend-normal">
   <div className="my-2  hidden md:block">
     <Link to="/">
       <img
@@ -85,9 +86,9 @@ const [isMenuOpen , setMenuOpen] = useState(false);
       <li>
          <button
       onClick={toggleDarkMode}
-      className="bg-pink-300 py-1 px-4 rounded-lg hover:bg-pink-400 transition duration-300 ease-in-out"
+      className="transition duration-300 ease-in-out mt-3"
     >
-      {isDarkMode ? "Light Mode" : "Dark Mode"}
+      <img src={dark} alt="cart" className="h-5 w-5 mx-2  transition-transform duration-300 transform hover:scale-105" />
     </button>
       </li>
     </ul>
