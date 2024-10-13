@@ -123,28 +123,6 @@ const Body = () => {
           </div>
         </div>
 
-        <div className="container mb-4">
-          <div className="row justify-content-center">
-            <div className="col-lg-6 col-md-8 d-flex">
-              <input
-                data-testid="search-input"
-                className="form-control me-2"
-                type="text"
-                placeholder="Search your food"
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-              />
-              <button
-                data-testid="search-btn"
-                className="btn btn-pink"
-                onClick={() => setSearch(search)}
-              >
-                Search
-              </button>
-            </div>
-          </div>
-        </div>
-
         {error && (
           <p className="p-2 font-bold text-center text-red-500">{error}</p>
         )}
