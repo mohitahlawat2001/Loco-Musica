@@ -111,7 +111,7 @@ const Body = () => {
               />
               <button
                 data-testid="search-btn"
-                className="bg-pink-300 end-2.5 bottom-2.5 lg:right-90 font-medium rounded-lg text-sm px-9 py-4 ml-5"
+                className="bg-pink-300 end-2.5 bottom-2.5 lg:right-90 font-medium rounded-lg text-sm px-9 py-4 ml-5 mt-4"
                 onClick={() => {
                   // Trigger search on button click (optional; can also rely on input change)
                   setSearch(search);
