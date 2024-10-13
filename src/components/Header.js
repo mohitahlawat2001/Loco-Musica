@@ -31,10 +31,10 @@ const [isMenuOpen , setMenuOpen] = useState(false);
 
 
   return (
-    <>
-    <div className={`${ isDarkMode ? "bg-gray-800" : "bg-white text-black" } fixed`}>
+    
+    <div className={`${ isDarkMode ? "bg-gray-800" : "bg-white text-black" } `}>
+    <div className=" max-w-screen-lg mx-auto  flex justify-between items-center border border-gray-300 rounded-lg shadow-md sticky  py-1 px-4  top-0  mix-blend-normal">
 
-    <div className=" max-w-screen-lg mx-auto  flex justify-between items-center border border-gray-300 rounded-lg shadow-md  py-1 px-4 sticky top-0 z-10 mix-blend-normal">
   <div className="my-2  hidden md:block">
     <Link to="/">
       <img
@@ -110,7 +110,7 @@ const [isMenuOpen , setMenuOpen] = useState(false);
   <div className={`border mx-auto rounded-md h-2 w-1/2 md:w-1/3 ${isOnline ? 'bg-green-400' : 'bg-red-400'}`} />
 </h1>
   </div>
-    </>
+    
   );
 };
 
