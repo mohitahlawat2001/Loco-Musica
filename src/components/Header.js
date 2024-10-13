@@ -87,7 +87,7 @@ const [isMenuOpen , setMenuOpen] = useState(false);
       onClick={toggleDarkMode}
       className="transition duration-300 ease-in-out mt-3"
     >
-      <img src={dark} alt="cart" className="h-5 w-5 mx-2  transition-transform duration-300 transform hover:scale-105" />
+      <img src={dark} alt="dark" className="h-5 w-5 mx-2  transition-transform duration-300 transform hover:scale-105" />
     </button>
       </li>
     </ul>
