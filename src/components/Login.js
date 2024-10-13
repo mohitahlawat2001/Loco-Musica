@@ -2,6 +2,7 @@ import UserContext from "../utils/useContext";
 import { useContext, useState,useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Mascot from "../assets/mascot.png";
+import PasswordStrengthBar from "react-password-strength-bar"
 
 const Login = () => {
     const { setName, setEmail, setLogin, user, setUser } = useContext(UserContext);
@@ -92,6 +93,7 @@ const Login = () => {
                             onChange={(e) => setPassword(e.target.value)} 
                             className="w-full p-3 rounded border border-gray-200 outline-none focus:border-gray-500" 
                         />
+                        <PasswordStrengthBar password={password} />
                     </div>
                     <button type="submit" className="w-full bg-yellow-500 py-3 rounded text-white hover:bg-yellow-400">Login</button>
                 </form>
