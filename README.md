@@ -74,6 +74,17 @@ Loco Musica is a versatile food ordering and recipe management application. Whet
 2. Click on the **Code** button, then click **Open with Codespaces**.
 3. Follow the instructions to set up your Codespace environment.
 
+### Using Docker
+
+1. Navigate to the project directory.
+   ```bash
+   cd loco-musica
+   ```
+2. Run this command in terminal:
+   ```bash
+   docker compose watch
+   ```
+
 ### Building for Production
 
 1. Build the project:
