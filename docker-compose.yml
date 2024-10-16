@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+  web:
+    image: loco_musica
+    container_name: container
+    build: .
+    ports:
+      - '1234:1234'
+    stdin_open: true
+    tty: true
+    develop:
+      watch:
+        - action: sync
+          path: .
+          target: /app
+          ignore:
+            - node_modules/
