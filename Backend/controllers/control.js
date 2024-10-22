@@ -81,3 +81,9 @@ export const register = async(req,res)=>{
   }
 
 
+export const simplefun = (req , res)=>{
+  return res.status(200).json({
+    status:"success",
+    data:"it is working"
+  })
+}
