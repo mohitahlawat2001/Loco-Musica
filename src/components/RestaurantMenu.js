@@ -4,16 +4,21 @@ import { MenuShimmer, RestaurantShimmer } from "./Shimmer";
 import useRestaurant from "../utils/useRestaurant";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart, removeFromCart, ToCart } from "../utils/cartSlice";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { memo } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown, faStar } from "@fortawesome/free-solid-svg-icons";
+import { baseUrl, getAndDeleteReq } from "../service/apiCalls";
 
 const RestanurantMenu = () => {
   const [displayCount, setDisplayCount] = useState(10);
   const { id } = useParams();
   const dispatch = useDispatch();
-
+  
+  const [restaurant , setRestaurant] = useState(null);
+  // console.log("restaurant" , restaurant);
+  const [menu , setMenu] = useState([]);
+  // console.log("menu from api call: " , menu)
   // Get the cart state
   const cart = useSelector((state) => state.cart.items);
 
@@ -34,7 +39,35 @@ const RestanurantMenu = () => {
     }
   };
 
-  const { restaurant, menu } = useRestaurant(id);
+  const getRestaurant = async()=>{
+    try {
+      const response = await getAndDeleteReq(`${baseUrl}/restaurant/${id}`);
+      // console.log("response from get restaurant api call: " , response.data);
+      setRestaurant(response.data);
+      return response.data;
+    } catch (error) {
+      console.log("error from get restaurant api call :" , error);
+    }
+  }
+
+  useEffect(()=>{
+    getRestaurant();
+  } , [])
+
+  const menuCard = async()=>{
+    try {
+      const response = await getAndDeleteReq(`${baseUrl}/foodmenu/getallfooditems/${id}`);
+      setMenu(response.data);
+      return response.data;
+    } catch (error) {
+      console.log("error from menu api call: " , error);
+    }
+  }
+
+  useEffect(()=>{
+    menuCard();
+  })
+  // const { restaurant, menu } = useRestaurant(id);
 
   return (
     <div className="grid grid-cols-4">
@@ -55,7 +88,7 @@ const RestanurantMenu = () => {
           </div>
           <div className="space-y-1">
             <p className="text-lg font-semibold">
-              {restaurant?.cuisines.join(", ")}
+              {/* {restaurant?.cuisines.join(", ")} */}
             </p>
             <p className="text-md">{restaurant?.areaName}, {restaurant?.city}</p>
             <p className="text-md">{restaurant?.costForTwoMessage}</p>
@@ -81,20 +114,18 @@ const RestanurantMenu = () => {
         <div className="mx-3 bg-gray-800 text-white p-4 rounded-lg mt-1 w-auto col-start-2 col-end-5">
           <h1 className="text-3xl font-bold mb-4">Menu</h1>
           <ul data-testid="menu">
-            {Object.values(menu)
-              .slice(0, displayCount)
-              .map((item) => (
-                <li key={item?.card?.info?.id} className="mb-4">
-                  <h3 className="text-2xl mb-2">{item?.card?.info?.name}</h3>
+            {menu.map((item) => (
+                <li key={item._id} className="mb-4">
+                  <h3 className="text-2xl mb-2">{item.name}</h3>
                   <p className="text-lg mb-2">
                     {item?.card?.info?.description}
                   </p>
-                  {!item?.card?.info?.defaultPrice ? (
+                  {!item?.card?.info?.defaultprice ? (
                     <p className="text-lg mb-2">
                       {item?.card?.info?.defaultPrice}
                     </p>
                   ) : (
-                    <p className="text-lg mb-2">{item?.card?.info?.price}</p>
+                    <p className="text-lg mb-2">{item.price}</p>
                   )}
 
                   <div className="flex justify-between items-center mt-4">
@@ -141,7 +172,7 @@ const RestanurantMenu = () => {
                 </li>
               ))}
           </ul>
-          {Object.values(menu).length > displayCount && (
+          {/* {Object.values(menu).length > displayCount && (
             <button
               type="button"
               className="bg-indigo-500 animate-bounce w-6 h-6 rounded-full"
@@ -149,7 +180,7 @@ const RestanurantMenu = () => {
             >
               <FontAwesomeIcon icon={faChevronDown} />
             </button>
-          )}
+          )} */}
         </div>
       )}
     </div>
