@@ -10,9 +10,12 @@ import RecipeStore from "../assets/recipeStore.png";
 import UserContext from "../utils/useContext";
 import { faCircleUser, faRightFromBracket, faBars } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useAuth } from "../context/authContext";
 
 const Header = () => {
   const { login, setLogin, user, setUser } = useContext(UserContext);
+  const storedUser = JSON.parse(sessionStorage.getItem("User"));
+  const {logoutUser} = useAuth();
 
   const isOnline = useOnline();
   const cart = useSelector((state) => state.cart.items);
@@ -81,9 +84,24 @@ const [isMenuOpen , setMenuOpen] = useState(false);
     </ul>
   </div>
 
+  <div>
+    {
+      storedUser && storedUser.role === "owner" ? (
+        <>
+          <li style={{ listStyleType: "none" }}>
+            <Link className="relative inline-block hover:text-pink-300 font-bold transition-transform duration-300 transform hover:scale-105" to="/registerrestaurant">
+            registerRestaurant
+            <span className="absolute left-0 bottom-0 h-1 bg-pink-300 transform scale-x-0 transition-transform duration-300 origin-right hover:scale-x-100"></span>
+            </Link>
+          </li>
+      </>
+      ) : ""
+    }
+  </div>
+
   <div className="p-2 m-2">
-    {login ? (
-      <div onClick={handleLogout} className="cursor-pointer">
+    {storedUser ? (
+      <div onClick={logoutUser} className="cursor-pointer">
         <FontAwesomeIcon icon={faRightFromBracket} size="2xl" />
       </div>
     ) : (

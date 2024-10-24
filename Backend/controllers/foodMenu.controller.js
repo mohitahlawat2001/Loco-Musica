@@ -6,22 +6,19 @@ import { FoodMenu } from "../models/foodMenu.model.js";
 
 //create new foodItem
 export const newFoodItem = catchAsync(async (req,res)=>{
-    const {name , img , price , restaurantId} = req.body
-    if(!(name && img && price && restaurantId)){
+    const {name , price , restaurantId} = req.body
+    if(!(name && price && restaurantId)){
         throw new apiError(400 , "all fields are required");
     }
-    const imgPath = req.file?.path;
-    if(!imgPath){
-        throw new apiError(400 , "image is not sent! ");
-    }
-    const uploadCloudinary = await uploadOnCloudinary(imgPath);
-    if(!uploadCloudinary){
+    const imgPath = req.file ? req.file?.path : undefined
+    const uploadCloudinary = imgPath ? await uploadOnCloudinary(imgPath) : undefined
+    if(imgPath &&!uploadCloudinary){
         throw new apiError(500 , "Error in image upload! ");
     }
     const foodItem = await FoodMenu.create({
         name ,
         price ,
-        img:uploadCloudinary.url,
+        img:uploadCloudinary ? cloudinaryUpload.url : undefined,
         restaurantId
     });
     if(!foodItem){

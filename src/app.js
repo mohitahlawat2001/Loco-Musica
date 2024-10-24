@@ -18,6 +18,10 @@ import Login from "./components/Login";
 import { FallbackShimmer } from "./components/Shimmer";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';  // Import globally
+import Register from "./components/register";
+import { AuthProvider } from "./context/authContext";
+import RegisterRestaurant from "./components/RegisterRestaurant";
+import AddFoodMenu from "./components/AddFoodmenu";
 
 const About = lazy(() => import("./components/About"));
 const Contact = lazy(() => import("./components/Contact"));
@@ -29,10 +33,12 @@ const AppLayout = () => {
   return (
     <Provider store={store}>
     <UserContext.Provider value={{ name,setName, email,setEmail , login, setLogin  }}>
+      <AuthProvider>
       <Header />
       <Outlet />
       <Footer />
       <ToastContainer position="bottom-right" autoClose={5000} hideProgressBar />
+      </AuthProvider>
       </UserContext.Provider>
       </Provider>
   );
@@ -83,6 +89,18 @@ const appRoute = createBrowserRouter([
       },{
         path: "/login",
         element: <Login/>,
+      },
+      {
+        path:"/register",
+        element:<Register/>
+      },
+      {
+        path:"/registerrestaurant",
+        element:<RegisterRestaurant />
+      },
+      {
+        path:"/foodmenu",
+        element:<AddFoodMenu />
       }
     ],
   },

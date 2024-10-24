@@ -15,19 +15,16 @@ export const newRestaurant = catchAsync(async (req,res)=>{
         console.log("the restauant is: " , restaurant);
         throw new apiError(400 , "restaurant is already present");
     }
-    const coverImgPath = req.file?.path;
-    if(!coverImgPath){
-        throw new apiError(404 , "coverImgPath is not found")
-    }
-    const cloudinaryUpload = await uploadOnCloudinary(coverImgPath);
-    if(!cloudinaryUpload){
+    const coverImgPath = req.file ? req.file?.path : undefined;
+    const cloudinaryUpload = coverImgPath ? await uploadOnCloudinary(coverImgPath) : undefined;
+    if(coverImgPath && !cloudinaryUpload){
         throw new apiError(500 , "uploading a coverImg is not working! ");
     }
     const newRestaurant = await Restaurant.create({
         name ,
         address , 
         location ,
-        coverImg:cloudinaryUpload.url,
+        coverImg:cloudinaryUpload ? cloudinaryUpload.url : undefined,
         user
     })
     if(!newRestaurant){
@@ -61,6 +58,21 @@ export const getRestaurant = catchAsync(async(req,res)=>{
     }
     return res.status(200).json(
         new apiResponse(200 , restaurant , "the restaurant is! ")
+    )
+})
+
+//get a user specified restaurant
+export const getUserRestaurant = catchAsync(async (req,res)=>{
+    const {userId} = req.params;
+    if(!userId){
+        throw new apiError(400 , "userId is not sent! ");
+    }
+    const userRestaurant = await Restaurant.findOne({user:userId});
+    if(!userRestaurant){
+        throw new apiError(404 , "there is no restaurant for this user");
+    }
+    return res.status(200).json(
+        new apiResponse(200 , userRestaurant , "user restaurant is!")
     )
 })
 

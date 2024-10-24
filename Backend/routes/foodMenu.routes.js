@@ -1,10 +1,14 @@
 import express from "express";
 const router = express.Router();
 import {newFoodItem , getAllFoodItems , getFoodItem , updateFoodItem , deleteFoodItem} from "../controllers/foodMenu.controller.js";
-router.post("/newfooditem" , newFoodItem);
-router.get("/getallfooditems" , getAllFoodItems)
-router.get("/getfooditem" , getFoodItem);
-router.patch("/updatefooditem" , updateFoodItem);
-router.delete("/deletefooditem" , deleteFoodItem);
+import { upload } from "../middlewares/multer.middleware.js";
+
+router.post("/newfooditem" ,upload.single("img"), newFoodItem);
+router.get("/getallfooditems/:restaurantId" , getAllFoodItems)
+router.get("/getfooditem/:FoodItemId" , getFoodItem);
+
+//only specified user can update and update
+router.patch("/updatefooditem/:FoodItemId", upload.single("img") , updateFoodItem);
+router.delete("/deletefooditem/:FoodItemId" , deleteFoodItem);
 
 export default router; 

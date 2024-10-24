@@ -1,45 +1,27 @@
 import UserContext from "../utils/useContext";
 import { useContext, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate , Link} from "react-router-dom";
 import Mascot from "../assets/mascot.png";
 import PasswordStrengthBar from "react-password-strength-bar"
+import { useAuth } from "../context/authContext";
 
 const Login = () => {
-    const { setName, setEmail, setLogin, user, setUser } = useContext(UserContext);
-    const [name, setNameInput] = useState('');
-    const [email, setEmailInput] = useState('');
-
-    const [password, setPassword] = useState('');
-    const navigate = useNavigate();
-
-    const handleLogin = async (e) => {
-        e.preventDefault();
-
-        // Send the data to the backend
-        const response = await fetch("http://localhost:5000/register", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            credentials: 'include',
-            body: JSON.stringify({
-                name,
-                email,
-                password
-            }),
-        });
-
-        const data = await response.json();
-
-        // Assuming setUser updates the user in your context
-
-        setUser({ ...user, name: name, email: email, password: password, login: true });
-        history('/');
-    };
-
-
+    const {loginUser} = useAuth();
+    const [loginData , setLoginData] = useState({
+        email:"",
+        password:""
+    })
+    const handleLogin = (event)=>{
+        event.preventDefault();
+        try {
+            loginUser(loginData);
+            
+        } catch (error) {
+            console.log("error from login page: " , error);
+        }
+    }
     return (
-        <div className="flex flex-row items-center justify-around h-screen bg-gray-100">
+        <div className="flex flex-row items-center justify-around h-screen bg-gray-100" onSubmit={handleLogin}>
             <div>
                 <img src={Mascot} alt="mascot" className="w-full shadow-sm -mt-24" />
             </div>
@@ -49,24 +31,13 @@ const Login = () => {
                     <div className="mb-6">
                         <label htmlFor="name" className="block mb-2 text-sm text-gray-600 dark:text-gray-400">Name</label>
                         <input 
-                            value={name} 
-                            onChange={(e) => setNameInput(e.target.value)} 
-                            type="text" 
-                            name="name" 
-                            id="name" 
-                            placeholder="Enter Name" 
-                            className="w-full p-3 rounded border border-gray-200 outline-none focus:border-gray-500" 
-                        />
-                    </div>
-                    <div className="mb-6">
-                        <label htmlFor="email" className="block mb-2 text-sm text-gray-600 dark:text-gray-400">Email Address</label>
-                        <input 
+                            value={loginData.email} 
+                            onChange={(e) => setLoginData({...loginData , email:e.target.value})} 
                             type="email" 
                             name="email" 
                             id="email" 
-                            placeholder="Enter Email Address" 
-                            value={email} 
-                            onChange={(e) => setEmailInput(e.target.value)} 
+                            required
+                            placeholder="Enter Email" 
                             className="w-full p-3 rounded border border-gray-200 outline-none focus:border-gray-500" 
                         />
                     </div>
@@ -76,14 +47,16 @@ const Login = () => {
                             type="password" 
                             name="password" 
                             id="password" 
+                            required
                             placeholder="Enter Password" 
-                            value={password} 
-                            onChange={(e) => setPassword(e.target.value)} 
+                            value={loginData.password} 
+                            onChange={(e) => setLoginData({...loginData , password:e.target.value})} 
                             className="w-full p-3 rounded border border-gray-200 outline-none focus:border-gray-500" 
                         />
-                        <PasswordStrengthBar password={password} />
+                        
                     </div>
                     <button type="submit" className="w-full bg-yellow-500 py-3 rounded text-white hover:bg-yellow-400">Login</button>
+                    <Link to={"/register"}><span className="hover:bg-yellow-400py-3 rounded text-center">create an account</span></Link>
                 </form>
                 {/* Uncomment if you want to use Google Login */}
                 {/* <div className="flex items-center w-full my-6">

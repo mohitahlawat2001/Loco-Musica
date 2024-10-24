@@ -7,7 +7,7 @@ const foodMenuSchema = new mongoose.Schema({
     },
     img:{
         type:String,
-        required:true
+        default:"https://unsplash.com/photos/meat-balls-on-white-ceramic-plate-u2Lp8tXIcjw"
     },
     price:{
         type:Number,

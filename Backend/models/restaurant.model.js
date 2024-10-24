@@ -16,7 +16,7 @@ const restaurantSchema = new mongoose.Schema({
     },
     coverImg:{
         type:String,
-        required:true
+        default:"https://unsplash.com/photos/assorted-dish-display-on-table-with-chairs-hN1zEipJ0qc"
     },
     review:[{
         type:mongoose.Schema.Types.ObjectId,

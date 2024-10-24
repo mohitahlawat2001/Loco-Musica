@@ -1,57 +1,83 @@
 import { User } from "../models/user.js";
+import { apiError } from "../utils/apiError.js";
+import { apiResponse } from "../utils/apiResponse.js";
+import { catchAsync } from "../utils/catchAsync.js";
+import jwt from 'jsonwebtoken';
 
-import { sendCookie } from "../utils/features.js";
+// import { sendCookie } from "../utils/features.js";
 import { Order } from "../models/orders.js";
 
-
-export const register = async(req,res)=>{
-    const { name, email, password} = req.body;
-    console.log(name + " " + email)
-  
-      const user = await User.findOne({email});
-  
-    if(user){
-      return res.status(404).json({
-        success:false,
-        message:"User already exists"
-      })
-    }
-      
-      try {
-       
-        const newUser = new User({ name, email, password});
-        await newUser.save();
-        // res.status(201).json(newUser); // Optional: respond with the created user object
-        sendCookie(newUser,res,"Succesfully Registerd" , 201)
-  
-      } catch (error) {
-        console.error('Error registering user:', error);
-        res.status(500).json({ error: 'Registration failed' });
-      }
+const Token = (user)=>{
+  try {
+      return jwt.sign({ id: user._id, name: user.name }, process.env.TOKEN_SECRET, { expiresIn: "3d" });
+  } catch (error) {
+      throw new apiError(500 , "token is not creating");
   }
+}
+const cookieOptions = {
+  httpOnly: true,
+  secure: false,
+  sameSite: 'Lax',
+};
+if (process.env.NODE_ENV === 'production') {
+  cookieOptions.secure = true;
+  cookieOptions.sameSite = 'None';
+}
 
-
-  export const login = async(req,res)=>{
-
-    const {name,email,password}=req.body;
-  
-    try{
-      const user = await User.findOne({email})
-  
-      if (!user) {
-        res.json({ success: false, user:"wrong email or password" });
-      } 
-
-      if(user.password===password){
-        res.json({success:true,user:"Logged In Succesfully"})
-      }
-  
-    }catch(error){
-    console.log(error)
-    }
+export const register = catchAsync(async(req ,res)=>{
+  const {name , email , password , role} = req.body;
+  if(!(name && email && password && role)){
+    throw new apiError(400 , "all fileds are required! ");
   }
+  const existUser = await User.findOne({email});
+  if(existUser){
+    throw new apiError(400 , "email is already taken!");
+  }
+  const user = await User.create({
+    name ,
+    email ,
+    password ,
+    role
+  })
   
-  export const orders = async(req,res)=>{
+  if(!user){
+    throw new apiError(500 , "user is not saved to databse");
+  }
+  user.password = undefined
+  const accessToken = Token(user);
+  return res.status(201).cookie("accessToken" , accessToken , cookieOptions).json(
+    new apiResponse(200 , user , "user is registered successfully!")
+  )
+})
+
+
+export const login = catchAsync( async(req, res)=>{
+  const {email , password} = req.body;
+  if(!(email && password)){
+    throw new apiError(400 , "check the credentials")
+  }
+  const existUser = await User.findOne({email})
+  if(!existUser){
+    throw new apiError(404 , "user is not found!");
+  }
+  const ispasswordvalid = await existUser.ispasswordcorrect(password);
+    if(!ispasswordvalid){
+        throw new apiError(400,"password is incorrect");
+    }
+    existUser.password = undefined;
+  const accessToken = Token(existUser);
+  return res.status(200).cookie("accessToken" , accessToken , cookieOptions).json(
+    new apiResponse(200 , existUser , "user is loged in")
+  )
+})
+
+export const logout = catchAsync(async (req , res)=>{
+  return res.clearCookie('accessToken', cookieOptions).json(
+    new apiResponse(204 , null , "user is loged out")
+  )
+})
+  
+export const orders = async(req,res)=>{
     const { name, email,OrderedItem,total} = req.body;
 
     try {
@@ -79,11 +105,9 @@ export const register = async(req,res)=>{
       });
     }
   }
-
-
-export const simplefun = (req , res)=>{
-  return res.status(200).json({
-    status:"success",
-    data:"it is working"
-  })
-}
+  export const somefun = (req , res)=>{
+    return res.status(200).json({
+      status:"success",
+      message:"hurry u maid request"
+    })
+  }
