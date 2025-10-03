@@ -94,7 +94,7 @@ const Footer = () => {
                                 <div className="w-full h-px bg-gray-700"></div>
                             </div>
                             <ul className="space-y-3">
-                                {['Home', 'About Us', 'Menu', 'Events', 'Contact', 'Reservations'].map((link, index) => (
+                                {['Home', 'About Us',  'Contact'].map((link, index) => (
                                     <li key={index}>
                                         <a 
                                             href="#" 
