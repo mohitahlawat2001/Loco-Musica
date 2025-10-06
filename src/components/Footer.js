@@ -208,7 +208,7 @@ const Footer = () => {
                     </div>
 
                     <div className="text-center animate-fadeInUp" style={{ animationDelay: '0.8s' }}>
-                        <p className="text-gray-300 text-sm font-medium">© 2024 Loco Musica. All rights reserved.</p>
+                        <p className="text-gray-300 text-sm font-medium">© {new Date().getFullYear()} Loco Musica. All rights reserved.</p>
                         <p className="text-gray-400 text-sm mt-1">Bringing the rhythm to your taste buds, one order at a time!</p>
                     </div>
                 </div>
