@@ -35,7 +35,7 @@ const Contact = () => {
             <Link to="https://discordapp.com/users/761943074426454026" className='mx-2' >
           <FontAwesomeIcon icon={faDiscord} />
           </Link>         
-          Join our community on Discord
+          Join our Community on Discord
            </li>
         </ul>
       </div>
