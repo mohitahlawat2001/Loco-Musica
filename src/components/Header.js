@@ -38,7 +38,6 @@ const Header = () => {
   const handleThemeSwitch = () => {
     const newTheme = theme === "dark" ? "light" : "dark";
     // --- LOGGING ADDED HERE ---
-    console.log(`BUTTON CLICKED: Changing theme from '${theme}' to '${newTheme}'`);
     setTheme(newTheme);
   };
 
