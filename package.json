@@ -24,7 +24,7 @@
     "@google/generative-ai": "^0.11.4",
     "@reduxjs/toolkit": "^2.2.3",
     "D": "^1.0.0",
-    "firebase": "^10.14.0",
+    "firebase": "^12.3.0",
     "marked": "^12.0.2",
     "parcel": "^2.12.0",
     "react": "^18.2.0",
