@@ -44,7 +44,6 @@ const Header = () => {
   return (
     <>
       <div className="max-w-screen-lg mx-auto flex justify-between items-center border border-gray-300 rounded-lg shadow-md mt-4 py-1 px-4 sticky top-0 z-10 bg-white dark:bg-gray-800 dark:border-gray-700 mix-blend-normal">
-        {/* ... rest of your JSX is the same ... */}
         <div className="my-2 hidden md:block">
           <Link to="/">
             <img src={Loco} alt="logo" data-testid="logo" className="h-10 w-10 shadow-sm border rounded-tr-lg rounded-bl-lg" />
