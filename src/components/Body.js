@@ -1,5 +1,4 @@
-import React, { useEffect, useState, useMemo } from "react"; // Import useMemo
-// import { swiggyApi } from "../Constants";
+import React, { useEffect, useState, useMemo } from "react";
 import { defaultLat, defaultLon } from "../Constants";
 import RestaurantCard from "./RestaurantCard";
 import Shimmer from "./Shimmer";
@@ -48,12 +47,9 @@ const Body = () => {
   const getRestaurants = async (lat, lon) => {
     try {
       const apiUrl = `https://foodfire.onrender.com/api/restaurants?lat=${lat}&lng=${lon}&page_type=DESKTOP_WEB_LISTING`;
-      //const apiUrl = `${swiggyApi}?lat=${lat}&lng=${lon}&page_type=DESKTOP_WEB_LISTING`;
-
       const response = await fetch(apiUrl);
       const json = await response.json();
 
-      // Function to find the restaurant data in the API response
       async function checkJsonData(jsonData) {
         for (let i = 0; i < jsonData?.data?.cards.length; i++) {
           let checkData =
@@ -66,7 +62,7 @@ const Body = () => {
       }
 
       const resData = await checkJsonData(json);
-      setAllRestaurants(resData || []); // Fallback to empty array if no data
+      setAllRestaurants(resData || []);
     } catch (error) {
       console.error("Error fetching restaurant data:", error);
       setError("Unable to fetch restaurant data.");
@@ -79,67 +75,60 @@ const Body = () => {
       return allRestaurants;
     }
     const filtered = filterRestaurant(allRestaurants, search);
-    if (filtered.length === 0) {
+if (filtered.length === 0) {
       setError("No results found");
     } else {
-      setError(null); // Clear error if results are found
+      setError(null);
     }
     return filtered;
-  }, [allRestaurants, search]); // Dependencies
+  }, [allRestaurants, search]);
 
   return (
-    <>
-      <div className="p-4 mx-10 text-center rounded-xl justify-items-center ">
-        {/* <input
-  data-testid="search-input"
-  className="w-64 mb-6 text-center border-2 border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent"
-  type="text"
-  placeholder="Search"
-  value={search}
-  onChange={(e) => setSearch(e.target.value)}
-/> */}
-        <div className="container mb-4 text-center rounded-xl">
-          <div className="row justify-content-center">
-            <div className="col-lg-6 col-md-8 d-flex">
-              <input
-                data-testid="search-input"
-                className="w-full lg:w-[60%] p-4 text-sm text-gray-900 border-2 border-gray-300 rounded-md md:ps-10 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent"
-                type="text"
-                placeholder="Search your food"
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-              />
-              <button
-                data-testid="search-btn"
-                className="bg-pink-300 end-2.5 bottom-2.5 lg:right-90 font-medium rounded-lg text-sm px-9 py-4 ml-5 mt-4"
-                onClick={() => {
-                  // Trigger search on button click (optional; can also rely on input change)
-                  setSearch(search);
-                }}
-              >
-                Search
-              </button>
-            </div>
+    // Added dark mode background to the main container
+    <div className="p-4 mx-10 text-center rounded-xl justify-items-center bg-white dark:bg-gray-900">
+      <div className="container mb-4 text-center rounded-xl">
+        <div className="row justify-content-center">
+          <div className="col-lg-6 col-md-8 d-flex">
+            {/* Added dark mode styles to the search input */}
+            <input
+              data-testid="search-input"
+              className="w-full lg:w-[60%] p-4 text-sm text-gray-900 border-2 border-gray-300 rounded-md md:ps-10 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent dark:bg-gray-700 dark:border-gray-600 dark:text-gray-100 dark:placeholder-gray-400"
+              type="text"
+              placeholder="Search your food"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+            />
+            {/* Added dark mode styles to the search button */}
+            <button
+              data-testid="search-btn"
+              className="bg-pink-300 dark:bg-purple-600 dark:hover:bg-purple-700 end-2.5 bottom-2.5 lg:right-90 font-medium rounded-lg text-sm px-9 py-4 ml-5 mt-4"
+              onClick={() => {
+                setSearch(search);
+              }}
+            >
+              Search
+            </button>
           </div>
         </div>
-
-        {error && (
-          <p className="p-2 font-bold text-center text-red-500">{error}</p>
-        )}
-        {allRestaurants?.length === 0 ? (
-          <Shimmer />
-        ) : (
-          <div
-            data-testid="res-list"
-            className="flex flex-row flex-wrap justify-center mx-20"
-          >
-            {filteredRestaurants.map((restaurant) => (
-              <RestaurantCard key={restaurant?.info.id} {...restaurant?.info} />
-            ))}
-          </div>
-        )}
       </div>
-    </>
+
+      {/* Added dark mode text color for error messages */}
+      {error && (
+        <p className="p-2 font-bold text-center text-red-500 dark:text-red-400">{error}</p>
+      )}
+      {allRestaurants?.length === 0 ? (
+        <Shimmer />
+      ) : (
+        <div
+          data-testid="res-list"
+          className="flex flex-row flex-wrap justify-center mx-20"
+        >
+          {filteredRestaurants.map((restaurant) => (
+            <RestaurantCard key={restaurant?.info.id} {...restaurant?.info} />
+          ))}
+        </div>
+      )}
+    </div>
   );
 };
 
