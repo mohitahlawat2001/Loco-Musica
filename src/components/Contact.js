@@ -29,13 +29,13 @@ const Contact = () => {
             <Link to="https://www.twitter.com/mahlawat2001/" className='mx-2' >
           <FontAwesomeIcon icon={faXTwitter} />
           </Link>
-          Follow Us on X
+          Follow Us on X for Updates
           </li>
           <li className="mb-2">
             <Link to="https://discordapp.com/users/761943074426454026" className='mx-2' >
           <FontAwesomeIcon icon={faDiscord} />
           </Link>         
-          Message Us on Discord
+          Join our community on Discord
            </li>
         </ul>
       </div>
