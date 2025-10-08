@@ -17,25 +17,25 @@ const Contact = () => {
           <li className="mb-2">
             <Link to="https://www.linkedin.com/in/mohitahlawat/" className='mx-2' >
           <FontAwesomeIcon icon={faLinkedin} /> 
-          </Link> Connet with me on LinkedIn
+          </Link> Connect with Us on LinkedIn
                  </li>
           <li className="mb-2">
             <Link to="https://www.github.com/mohitahlawat2001/" className='mx-2' >
             <FontAwesomeIcon icon={faGithub} />
             </Link>
-            look at my projects on GitHub
+            Explore Our Projects on GitHub
           </li>
           <li className="mb-2">
             <Link to="https://www.twitter.com/mahlawat2001/" className='mx-2' >
           <FontAwesomeIcon icon={faXTwitter} />
           </Link>
-          Follow me on Twitter
+          Follow Us on X for Updates
           </li>
           <li className="mb-2">
             <Link to="https://discordapp.com/users/761943074426454026" className='mx-2' >
           <FontAwesomeIcon icon={faDiscord} />
           </Link>         
-          send me a message on Discord
+          Join our Community on Discord
            </li>
         </ul>
       </div>
